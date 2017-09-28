@@ -52,13 +52,13 @@ class ModalWithState extends Component {
           isOpen={this.state.isOpen}
         >
           <Card>
-            <CardTitle icon={<IconAddPhoto />}>Add Photo</CardTitle>
+            <CardTitle title="Add Photo" icon={<IconAddPhoto />} />
             <CardContent>
               This is the modal Content with React Modal module
             </CardContent>
             <CardActions>
-              <Button color="red" variant="dashed">Cancel</Button>
-              <Button color="green-primary" variant="dashed">Confirm</Button>
+              <Button color="red" variant="dashed" onClick={this.handleToggleModal}>Cancel</Button>
+              <Button color="green-primary" variant="dashed" onClick={this.handleToggleModal}>Confirm</Button>
             </CardActions>
           </Card>
         </Modal>
