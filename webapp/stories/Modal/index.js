@@ -5,7 +5,6 @@ import { storiesOf } from '@storybook/react'
 import IconAddPhoto from 'react-icons/lib/md/add-a-photo'
 
 import Modal from '../../src/components/Modal'
-import Modal2 from '../../src/components/Modal2'
 
 import {
   Card,
@@ -69,9 +68,6 @@ class ModalWithState extends Component {
 }
 
 storiesOf('Modal', module)
-  .add('react-modal', () => (
+  .add('default', () => (
     <ModalWithState />
-  ))
-  .add('react-toolbox', () => (
-    <Modal2>This is the modal Content with React Toolbox dialog</Modal2>
   ))
