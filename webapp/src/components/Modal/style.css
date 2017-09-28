@@ -1,4 +1,29 @@
-.overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+:root {
+  --modal-inner-width: 540px;
+  --modal-padding-background-color: #efefef;
+  --modal-padding-width: 20px;
+  --modal-border-radius: 3px;
 }
 
+.modal {
+  position: absolute;
+  transform: translateY(40px);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border: 20px solid var(--modal-padding-background-color);
+  border-radius: var(--modal-border-radius);
+  outline: none;
+  width: var(--modal-inner-width);
+  box-shadow: 0 3px 4.8px 0.2px #e9e9e9;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+}

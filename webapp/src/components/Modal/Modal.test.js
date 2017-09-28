@@ -7,6 +7,12 @@ import Modal from './index'
 
 describe('Modal', () => {
   it('should mount', () => {
-    shallow(<Modal>Modal Content</Modal>)
+    shallow(
+      <Modal
+        isOpen={false}
+        label="Content Meaning"
+      >
+        Modal Content
+      </Modal>)
   })
 })
