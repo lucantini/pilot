@@ -13,17 +13,20 @@ jobs:
       - restore_cache:
           keys:
           - webapp-dependencies-{{ checksum "webapp/package.json" }}
-          - weapp-dependencies-
+          - webapp-dependencies-
 
       - run: |
           cd webapp
+          npm install -g yarn
           yarn
           yarn lint
           yarn build
           yarn test
+          yarn visual-tests
 
       - save_cache:
           paths:
             - webapp/node_modules
+
           key: webapp-dependencies-{{ checksum "webapp/package.json" }}
 
