@@ -135,7 +135,7 @@
     }
   },
   "devDependencies": {
-    "loki": "felquis/loki"
+    "loki": "0.6.3"
   },
   "loki": {
     "diffingEngine": "looks-same",
