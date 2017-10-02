@@ -63,6 +63,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [Continuous Integration](#continuous-integration)
   - [Disabling jsdom](#disabling-jsdom)
   - [Snapshot Testing](#snapshot-testing)
+  - [Visual Regression Testing](#visual-regression-testing)
   - [Editor Integration](#editor-integration)
 - [Developing Components in Isolation](#developing-components-in-isolation)
   - [Getting Started with Storybook](#getting-started-with-storybook)
@@ -1458,6 +1459,36 @@ Finally, jsdom is also not needed for [snapshot testing](http://facebook.github.
 ### Snapshot Testing
 
 Snapshot testing is a feature of Jest that automatically generates text snapshots of your components and saves them on the disk so if the UI output changes, you get notified without manually writing any assertions on the component output. [Read more about snapshot testing.](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html)
+
+### Visual Regression Testing
+
+We use loki to run visual regression tests, [loki](https://www.npmjs.com/package/loki) generate images from each snapshot from `./stories` folder, we maintain the folder `.loki/reference` into version control, and on CI it generate new images, and use [looks-same](https://www.npmjs.com/package/looks-same)
+
+How it works CI:
+
+- When you change the style or structure of any ./stories or any ./src/components that are used inside ./stories
+- On CI we run `yarn storybook` and run loki test (see .travis.yml and .circleci)
+- It will generate a new image from each snapshot and compare it with the reference image
+- If it differ the CI will break!
+- It will give you a comand to approve/update the changes, before running it start `yarn storybook` and then run:
+  ```sh
+    yarn loki update --storiesFilter="^Toolbar DateRange\$" --reactUri="file:./storybook-static"
+  ```
+
+  In the regex above, on each | it tests a string to match a give snapshot, every snapshot that matches will be added to the `.loki/reference` folder
+
+When someone changes reference, the new reference images needs to me added into version control, and the images que be checked on GitHub diffs, or you can generate
+the images localy running:
+
+```sh
+  yarn shooting-stars
+```
+
+You can see the diff images in the `.loki/difference` folder, also check the folders `.loki/current` and `.loki/reference` if necessary
+
+![chrome_palm_progress_linear_normal](https://user-images.githubusercontent.com/736728/31058114-93e7a53a-a6c4-11e7-957d-cae57f2e53d6.png)
+
+![chrome_palm_toolbar_daterange](https://user-images.githubusercontent.com/736728/31058115-96d67e2e-a6c4-11e7-8bc9-545934fbe601.png)
 
 ### Editor Integration
 
