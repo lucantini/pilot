@@ -1481,7 +1481,7 @@ When someone changes reference, the new reference images needs to me added into 
 the images localy running:
 
 ```sh
-  yarn shooting-stars
+  yarn visual-tests
 ```
 
 You can see the diff images in the `.loki/difference` folder, also check the folders `.loki/current` and `.loki/reference` if necessary

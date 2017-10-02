@@ -5476,9 +5476,9 @@ loglevel@^1.4.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.5.0.tgz#3863984a2c326b986fbb965f378758a6dc8a4324"
 
-loki@felquis/loki:
-  version "0.6.2"
-  resolved "https://codeload.github.com/felquis/loki/tar.gz/459a4b14238e53d30c349fbbd1b594bea9ab2e8c"
+loki@0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/loki/-/loki-0.6.3.tgz#c894c3fa21be23fb820989ebd466ca01dd0d15b2"
   dependencies:
     chalk "^2.0.1"
     chrome-remote-interface "^0.23.3"
