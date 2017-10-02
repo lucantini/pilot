@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
 import { configure, setAddon, getStorybook } from '@storybook/react'
+import 'loki/configure-react';
 import createPercyAddon from '@percy-io/percy-storybook'
 
 
