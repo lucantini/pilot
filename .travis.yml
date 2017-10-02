@@ -22,5 +22,5 @@ script:
   - yarn lint
   - yarn build
   - yarn test
-  - yarn shooting-stars
+  - yarn visual-tests
 
