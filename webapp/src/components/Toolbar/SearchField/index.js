@@ -13,6 +13,7 @@ const SearchField = ({
   disabled,
   onChange,
   value,
+  placeholder,
 }) => (
   <div className={toolItemStyle.root}>
     <span className={style.icon}>
@@ -26,6 +27,7 @@ const SearchField = ({
         value={value}
         className={style.input}
         type="search"
+        placeholder={placeholder}
       />
     </div>
   </div>
@@ -35,10 +37,12 @@ SearchField.propTypes = {
   onChange: func.isRequired,
   value: string.isRequired,
   disabled: bool,
+  placeholder: string,
 }
 
 SearchField.defaultProps = {
   disabled: false,
+  placeholder: null,
 }
 
 export default SearchField
