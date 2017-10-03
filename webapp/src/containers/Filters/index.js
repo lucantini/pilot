@@ -67,11 +67,17 @@ class Filters extends Component {
   }
 
   handleDateRangeChange (selectedDate) {
-    this.setState({ selectedDate })
+    this.setState({
+      selectedDate,
+      submitted: false,
+    })
   }
 
   handleSearchFieldChange (search) {
-    this.setState({ search })
+    this.setState({
+      search,
+      submitted: false,
+    })
   }
 
   handleFilterChange (filter, values) {
@@ -80,6 +86,7 @@ class Filters extends Component {
         this.state.activeFilters,
         { [filter]: values }
       ),
+      submitted: false,
     })
   }
 
@@ -88,6 +95,7 @@ class Filters extends Component {
       activeFilters: {},
       selectedDate: 'hoje',
       search: '',
+      submitted: false,
     })
 
     this.setDefaults()
@@ -110,6 +118,11 @@ class Filters extends Component {
       }
     )
 
+
+    this.setState({
+      submitted: true,
+    })
+
     this.props.onFilter(selectedFilters)
   }
 
@@ -129,17 +142,19 @@ class Filters extends Component {
           <CardContent>
             <Grid>
               <Row flex>
-                <Col>
+                <Col desk={2}>
                   <DateRange
                     items={this.props.dateRanges}
                     onChange={this.handleDateRangeChange}
                     selected={this.state.selectedDate.value}
                   />
                 </Col>
-                <Col alignEnd>
+                <Col desk={10}>
                   <SearchField
                     value={this.state.search}
+                    placeholder="Filtre por ID, CPF, nome e e-mail."
                     onChange={this.handleSearchFieldChange}
+                    active={!!this.state.search}
                   />
                 </Col>
               </Row>
@@ -182,7 +197,11 @@ class Filters extends Component {
                       type="submit"
                       size="small"
                     >
-                      Filtrar
+                      {
+                        this.state.submitted
+                          ? 'Filtrar'
+                          : 'Aplicar filtros'
+                      }
                     </Button>
                   </Col>
                 </Row>
