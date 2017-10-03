@@ -15,18 +15,19 @@ const SearchField = ({
   value,
 }) => (
   <div className={toolItemStyle.root}>
-    <input
-      disabled={disabled}
-      onChange={e => !disabled && onChange(e.target.value)}
-      value={value}
-      className={style.input}
-      placeholder="Busca"
-      type="search"
-    />
-
-    <button className={style.button}>
+    <span className={style.icon}>
       <IconSearch />
-    </button>
+    </span>
+
+    <div className={style.inputWrap}>
+      <input
+        disabled={disabled}
+        onChange={e => !disabled && onChange(e.target.value)}
+        value={value}
+        className={style.input}
+        type="search"
+      />
+    </div>
   </div>
 )
 
