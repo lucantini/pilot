@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
-import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
 import IconFunnel from 'react-icons/lib/fa/filter'
 import {
   merge,
@@ -126,14 +124,7 @@ class Filters extends Component {
           <CardTitle
             title="Filtros"
             icon={<IconFunnel />}
-            onClick={this.handleVisibility}
-          >
-            {
-              showContent
-                ? <IconArrowUp />
-                : <IconArrowDown />
-            }
-          </CardTitle>
+          />
 
           <CardContent>
             <Grid>
