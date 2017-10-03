@@ -17,5 +17,16 @@
   box-shadow: var(--toolitem-box-shadow);
   font-family: var(--toolitem-font-family);
   font-size: var(--toolitem-font-size: 14px);
+  transition: border-color 100ms ease-in-out;
+}
+
+.active,
+.focused {
+  border-color: var(--toolitem-focused-color);
+}
+
+.root.active svg,
+.root.focused svg {
+  color: var(--toolitem-focused-color);
 }
 

@@ -15,9 +15,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   padding-left: 10px;
+}
+
+.icon svg {
+  font-size: 20px;
   color: var(--search-field-button-color);
+  transition: color 100ms ease-in-out;
 }
 
 .input:disabled,
