@@ -11,16 +11,26 @@ import {
 
 import moment from 'moment'
 
+import {
+  DateRangePicker,
+} from 'react-dates'
+
 import IconCalendar from 'react-icons/lib/fa/calendar'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
+import './react-dates.scss'
 
 class DatePicker extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = { value: '' }
+    this.state = {
+      value: '',
+      startDate: null,
+      endDate: null,
+      focusedInput: 'startDate',
+    }
 
     this.name = shortid.generate()
 
@@ -49,10 +59,6 @@ class DatePicker extends React.Component {
       disabled,
     } = this.props
 
-    const {
-      value,
-    } = this.state
-
     return (
       <div className={toolItemStyle.root}>
         <label
@@ -64,14 +70,13 @@ class DatePicker extends React.Component {
           </span>
 
           <div>
-            <input
-              name={this.name}
-              type="date"
-              id={this.name}
-              value={value}
+            <DateRangePicker
               disabled={disabled}
-              onChange={e => !disabled && this.handleChange(e.target.value)}
-              className={style.input}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+              focusedInput={this.state.focusedInput}
+              onFocusChange={focusedInput => this.setState({ focusedInput })}
             />
           </div>
         </label>
