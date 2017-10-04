@@ -2,6 +2,7 @@
 @import "../../styles/typography.css";
 
 :root {
+  --toolbar-height: 40px;
   --toolitem-border-color: #e5e5e5;
   --toolitem-focused-color: #3ed2a4;
   --toolitem-background-color: var(--color-background-light);

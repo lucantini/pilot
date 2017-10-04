@@ -16,8 +16,9 @@ import {
   CardActions,
 } from '../../components/Card'
 
-import DateRange from '../../components/Toolbar/DateRange'
+import DatePicker from '../../components/Toolbar/FancyDatePicker'
 import SearchField from '../../components/Toolbar/SearchField'
+import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button'
 
 import {
@@ -41,7 +42,7 @@ class Filters extends Component {
     }
 
     this.handleVisibility = this.handleVisibility.bind(this)
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this)
+    this.handleDatePickerChange = this.handleDatePickerChange.bind(this)
     this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
     this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleCleanFilters = this.handleCleanFilters.bind(this)
@@ -53,12 +54,8 @@ class Filters extends Component {
   }
 
   setDefaults () {
-    const {
-      dateRanges,
-    } = this.props
-
     this.setState({
-      selectedDate: { value: dateRanges[0].value },
+      selectedDate: '',
     })
   }
 
@@ -66,7 +63,9 @@ class Filters extends Component {
     this.setState({ showContent: !this.state.showContent })
   }
 
-  handleDateRangeChange (selectedDate) {
+  handleDatePickerChange (selectedDate) {
+    console.log(selectedDate)
+
     this.setState({
       selectedDate,
       submitted: false,
@@ -142,20 +141,20 @@ class Filters extends Component {
           <CardContent>
             <Grid>
               <Row flex>
-                <Col desk={2}>
-                  <DateRange
-                    items={this.props.dateRanges}
-                    onChange={this.handleDateRangeChange}
-                    selected={this.state.selectedDate.value}
-                  />
-                </Col>
-                <Col desk={10}>
-                  <SearchField
-                    value={this.state.search}
-                    placeholder="Filtre por ID, CPF, nome e e-mail."
-                    onChange={this.handleSearchFieldChange}
-                    active={!!this.state.search}
-                  />
+                <Col>
+                  <Toolbar>
+                    <DatePicker
+                      onChange={this.handleDatePickerChange}
+                      selected={this.state.selectedDate.value}
+                    />
+
+                    <SearchField
+                      value={this.state.search}
+                      placeholder="Filtre por ID, CPF, nome e e-mail."
+                      onChange={this.handleSearchFieldChange}
+                      active={!!this.state.search}
+                    />
+                  </Toolbar>
                 </Col>
               </Row>
 
@@ -215,10 +214,6 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  dateRanges: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  })).isRequired,
   sections: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({

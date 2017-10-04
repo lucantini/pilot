@@ -1,0 +1,29 @@
+@import "./properties.css";
+@import "../properties.css";
+
+.root {
+  font-size: 14px;
+}
+
+.root,
+.root * {
+  box-sizing: border-box;
+}
+
+.label {
+  display: flex;
+}
+
+.icon {
+  color: #999999;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.input {
+  width: 100%;
+  border: 0;
+  padding: 6px;
+  font-size: 14px;
+}
