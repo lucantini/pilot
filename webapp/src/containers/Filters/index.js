@@ -140,7 +140,7 @@ class Filters extends Component {
 
           <CardContent>
             <Grid>
-              <Row flex>
+              <Row flex className={style.customRow}>
                 <Col>
                   <Toolbar>
                     <DatePicker

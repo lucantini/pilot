@@ -20,6 +20,8 @@
   font-family: var(--toolitem-font-family);
   font-size: var(--toolitem-font-size: 14px);
   transition: border-color 100ms ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 
 .active,

@@ -21,10 +21,6 @@
 }
 
 .customRow {
-  z-index: 0
+  overflow-x: initial;
 }
 
-/*
- * You need to reset overflow-x, and fix the z-index of the elements
- * Open storybook/filters on your browsers
- */
