@@ -39,3 +39,13 @@
 .DateRangePicker > div {
   height: 100%;
 }
+
+.DateRangePicker__picker--open-down {
+  top: 45px;
+}
+
+.DateInput--open-down.DateInput--with-caret::before,
+.DateInput--open-down.DateInput--with-caret::after {
+  top: 30px;
+}
+
