@@ -72,11 +72,14 @@ class DatePicker extends React.Component {
           <div>
             <DateRangePicker
               disabled={disabled}
+              daySize={40}
               startDate={this.state.startDate}
               endDate={this.state.endDate}
               onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
               focusedInput={this.state.focusedInput}
               onFocusChange={focusedInput => this.setState({ focusedInput })}
+              renderCalendarInfo={() => <div>What?</div>}
+              customArrowIcon={<i className={style.calendarCustomArrow} />}
             />
           </div>
         </label>

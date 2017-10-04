@@ -5,3 +5,37 @@
   position: absolute;
   z-index: 1;
 }
+
+.CalendarDay {
+  /*
+    override style prop
+    react-dates uses daySize
+    to calculate the width,
+    on css we can safely override
+    the height property
+   */
+  height: 28px !important;
+}
+
+.DateInput {
+  width: auto;
+  font-size: 14px;
+  padding: 0;
+  line-height: 100%;
+}
+
+.DateRangePickerInput {
+  border-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.DateRangePicker {
+  height: 100%;
+  background-color: blue;
+}
+
+.DateRangePicker > div {
+  height: 100%;
+}

@@ -26,3 +26,11 @@
   padding: 6px;
   font-size: 14px;
 }
+
+.calendarCustomArrow {
+  height: 18px;
+  width: 2px;
+  background-color: #eee;
+  display: block;
+  margin-left: 10px;
+}
