@@ -64,8 +64,6 @@ class Filters extends Component {
   }
 
   handleDatePickerChange (selectedDate) {
-    console.log(selectedDate)
-
     this.setState({
       selectedDate,
       submitted: false,

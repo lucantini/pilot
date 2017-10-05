@@ -16,6 +16,8 @@ import {
 } from 'react-dates'
 
 import IconCalendar from 'react-icons/lib/fa/calendar'
+import IconArrowLeft from 'react-icons/lib/fa/angle-left'
+import IconArrowRight from 'react-icons/lib/fa/angle-right'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
@@ -79,7 +81,11 @@ class DatePicker extends React.Component {
               focusedInput={this.state.focusedInput}
               onFocusChange={focusedInput => this.setState({ focusedInput })}
               renderCalendarInfo={() => <div>What?</div>}
+              navPrev={<IconArrowLeft />}
+              navNext={<IconArrowRight />}
               customArrowIcon={<i className={style.calendarCustomArrow} />}
+              horizontalMargin={24 / 2}
+              hideKeyboardShortcutsPanel
             />
           </div>
         </label>

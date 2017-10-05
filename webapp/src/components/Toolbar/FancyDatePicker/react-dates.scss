@@ -1,9 +1,18 @@
 @import '~react-dates/css/variables.scss';
 @import '~react-dates/css/styles.scss';
 
+:root {
+  --date-picker-font-size: 14px;
+  --date-picker-icon-font-size: 18px;
+  --date-picker-week-name-color: #7ddfac;
+  --date-picker-week-name-background: #f5f5f5;
+  --date-picker-top: 45px;
+}
+
 .DateRangePicker {
   position: absolute;
   z-index: 1;
+  font-family: "Cabin", "Uni Neue";
 }
 
 .CalendarDay {
@@ -19,7 +28,7 @@
 
 .DateInput {
   width: auto;
-  font-size: 14px;
+  font-size: var(--date-picker-font-size);
   padding: 0;
   line-height: 100%;
 }
@@ -31,21 +40,127 @@
   align-items: center;
 }
 
-.DateRangePicker {
-  height: 100%;
-  background-color: blue;
-}
-
+.DateRangePicker,
 .DateRangePicker > div {
   height: 100%;
 }
 
 .DateRangePicker__picker--open-down {
-  top: 45px;
+  top: var(--date-picker-top);
 }
 
 .DateInput--open-down.DateInput--with-caret::before,
 .DateInput--open-down.DateInput--with-caret::after {
-  top: 30px;
+  top: calc(var(--date-picker-top) - var(--date-picker-font-size));
 }
 
+.DayPickerNavigation__next,
+.DayPickerNavigation__prev {
+  border: 0;
+  background-color: #ffffff;
+  font-size: var(--date-picker-icon-font-size);
+}
+
+.CalendarMonth__caption {
+  font-size: var(--date-picker-font-size);
+  text-transform: uppercase;
+}
+
+.DayPicker__week-header {
+  top: 53px;
+}
+
+.DayPicker__week-header ul {
+  background-color: var(--date-picker-week-name-background);
+  color: var(--date-picker-week-name-color);
+  text-transform: uppercase;
+  border-top: 1px solid rgba(228, 228, 228, 0.5);
+  border-bottom: 1px solid rgba(228, 228, 228, 0.5);
+}
+
+.CalendarDay {
+  border: 0;
+  color: #6f6f6f;
+}
+
+.DayPickerNavigation__next,
+.DayPickerNavigation__prev {
+  color: #3ed2a4;
+}
+
+.DayPickerNavigation--horizontal .DayPickerNavigation__prev {
+  left: 10px;
+}
+
+.DayPickerNavigation--horizontal .DayPickerNavigation__next {
+  right: 10px;
+}
+
+.CalendarDay--blocked-out-of-range {
+  color: #b2b2b2;
+}
+
+.CalendarDay--selected-start,
+.CalendarDay--selected-end,
+.CalendarDay--selected {
+  background-color: #3ed2a4;
+  color: #fff;
+}
+
+.CalendarDay--selected-start {
+  border-radius: 7px 0 0 7px;
+}
+
+.CalendarDay--selected-end {
+  border-radius: 0 7px 7px 0;
+}
+
+.CalendarDay--selected-span {
+  background-color: #eeeeee;
+}
+
+.CalendarMonth--horizontal .CalendarMonth__caption,
+.CalendarMonth--vertical .CalendarMonth__caption {
+  padding: 15px 0 46px;
+}
+
+.CalendarDay .CalendarDay--hovered-span {
+  background-color: rgba(62, 210, 164, 0.5);
+}
+
+.CalendarMonth table {
+  position: relative;
+}
+
+.CalendarMonth table:before {
+  content: "";
+  display: block;
+  height: 220px;
+  width: 1px;
+  background-color: rgba(0,0,0,0.05);
+  transform: translateX(-12px) translateY(-70px);
+  position: absolute;
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}
+
+.CalendarMonth[data-visible="true"] table:before {
+  opacity: 1;
+}
+
+.CalendarMonth[data-visible="false"] + .CalendarMonth table:before {
+  opacity: 0;
+}
+
+.CalendarMonth[data-visible="true"] .CalendarMonth__caption {
+  opacity: 1;
+}
+
+.CalendarMonth[data-visible="false"]:last-child .CalendarMonth__caption {
+  opacity: 0;
+}
+
+.CalendarMonth__caption {
+  opacity: 0;
+  transition: opacity 100ms ease-in-out;
+}

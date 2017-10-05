@@ -7,7 +7,7 @@ describe('<Toolbar />', () => {
   it('should mount', () => {
     mount(
       <Toolbar>
-        I'm the children.
+        I am the children.
       </Toolbar>
     )
   })
