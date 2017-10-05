@@ -11,18 +11,4 @@ describe('Tag', () => {
       />
     )
   })
-
-  it('should not call onClick', () => {
-    const onClick = jest.fn()
-
-    const component = shallow(
-      <Tag
-        text="hi"
-      />
-    )
-
-    component.simulate('click')
-
-    expect(onClick).toHaveBeenCalledTimes(0)
-  })
 })
