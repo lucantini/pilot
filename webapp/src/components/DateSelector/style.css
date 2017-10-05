@@ -52,13 +52,13 @@
   text-transform: uppercase;
   font-weight: bold;
   font-family: var(--title-font-family);
-  font-size: 12px;
+  font-size: 14px;
   padding-left: calc(var(--spacing-small) - 2px);
   border-left: 2px solid transparent;
 }
 
 .sidebar input:checked ~ label {
-  color: var(--color-green-accent-100);
+  color: var(--color-light-green-accent-100);
   border-left: 2px solid var(--color-light-green-accent-100);
 }
 
@@ -73,4 +73,12 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.actions caption {
+  flex: 1;
+  text-align: start;
+  color: #a1a1a1;
+  font-size: 12px;
+  margin-bottom: 10px;
 }

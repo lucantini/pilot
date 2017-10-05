@@ -12,7 +12,7 @@ const presets = [
     date: () => 1,
   },
   {
-    title: 'Ultimos',
+    title: 'Ultimos:',
     items: [
       {
         title: '7 dias',

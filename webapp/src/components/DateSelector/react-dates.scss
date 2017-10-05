@@ -1,163 +1,161 @@
 @import "./properties.css";
 
-.DayPicker {
-  border: none;
-  box-shadow: none;
-}
+.ReactDates-overrides {
+  .DayPicker {
+    border: none;
+    box-shadow: none;
+    font-weight: bold;
+  }
 
-.DateRangePicker {
-  position: absolute;
-  z-index: 1;
-  font-family: "Cabin", "Uni Neue";
-}
+  .DateRangePicker {
+    position: absolute;
+    z-index: 1;
+    font-family: "Cabin", "Uni Neue";
+  }
 
-.CalendarDay {
-  /*
-    override style prop
-    react-dates uses daySize
-    to calculate the width,
-    on css we can safely override
-    the height property
-   */
-  height: 28px !important;
-}
+  .CalendarDay {
+    font-size: var(--date-picker-font-size);
+    height: 28px !important;
+  }
 
-.DateInput {
-  width: auto;
-  font-size: var(--date-picker-font-size);
-  padding: 0;
-  line-height: 100%;
-}
+  .DateInput {
+    width: auto;
+    font-size: var(--date-picker-font-size);
+    padding: 0;
+    line-height: 100%;
+  }
 
-.DateRangePickerInput {
-  border-width: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
+  .DateRangePickerInput {
+    border-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
 
-.DateRangePicker,
-.DateRangePicker > div {
-  height: 100%;
-}
+  .DateRangePicker,
+  .DateRangePicker > div {
+    height: 100%;
+  }
 
-.DateRangePicker__picker--open-down {
-  top: var(--date-picker-top);
-}
+  .DateRangePicker__picker--open-down {
+    top: var(--date-picker-top);
+  }
 
-.DateInput--open-down.DateInput--with-caret:before,
-.DateInput--open-down.DateInput--with-caret:after {
-  top: calc(var(--date-picker-top) - var(--date-picker-font-size));
-}
+  .DateInput--open-down.DateInput--with-caret:before,
+  .DateInput--open-down.DateInput--with-caret:after {
+    top: calc(var(--date-picker-top) - var(--date-picker-font-size));
+  }
 
-.DayPickerNavigation__next,
-.DayPickerNavigation__prev {
-  border: 0;
-  background-color: #ffffff;
-  font-size: var(--date-picker-icon-font-size);
-}
+  .DayPickerNavigation__next,
+  .DayPickerNavigation__prev {
+    border: 0;
+    background-color: #ffffff;
+    font-size: var(--date-picker-icon-font-size);
+  }
 
-.CalendarMonth__caption {
-  font-size: var(--date-picker-font-size);
-  text-transform: uppercase;
-}
+  .CalendarMonth__caption {
+    font-size: var(--date-picker-font-size);
+    text-transform: uppercase;
+  }
 
-.DayPicker__week-header {
-  top: 53px;
-}
+  .DayPicker__week-header {
+    top: 53px;
+  }
 
-.DayPicker__week-header ul {
-  background-color: var(--date-picker-week-name-background);
-  color: var(--date-picker-week-name-color);
-  text-transform: uppercase;
-  border-top: 1px solid rgba(228, 228, 228, 0.5);
-  border-bottom: 1px solid rgba(228, 228, 228, 0.5);
-}
+  .DayPicker__week-header ul {
+    background-color: var(--date-picker-week-name-background);
+    color: var(--date-picker-week-name-color);
+    font-weight: var(--date-picker-week-name-font-weight);
+    text-transform: uppercase;
+    border-top: 1px solid rgba(228, 228, 228, 0.5);
+    border-bottom: 1px solid rgba(228, 228, 228, 0.5);
+  }
 
-.CalendarDay {
-  border: 0;
-  color: #6f6f6f;
-}
+  .CalendarDay {
+    border: 0;
+    color: #6f6f6f;
+  }
 
-.DayPickerNavigation__next,
-.DayPickerNavigation__prev {
-  color: #3ed2a4;
-}
+  .DayPickerNavigation__next,
+  .DayPickerNavigation__prev {
+    color: #3ed2a4;
+  }
 
-.DayPickerNavigation--horizontal .DayPickerNavigation__prev {
-  left: 10px;
-}
+  .DayPickerNavigation--horizontal .DayPickerNavigation__prev {
+    left: 10px;
+  }
 
-.DayPickerNavigation--horizontal .DayPickerNavigation__next {
-  right: 10px;
-}
+  .DayPickerNavigation--horizontal .DayPickerNavigation__next {
+    right: 10px;
+  }
 
-.CalendarDay--blocked-out-of-range {
-  color: #b2b2b2;
-}
+  .CalendarDay--blocked-out-of-range {
+    color: #b2b2b2;
+  }
 
-.CalendarDay--selected-start,
-.CalendarDay--selected-end,
-.CalendarDay--selected {
-  background-color: #3ed2a4;
-  color: #ffffff;
-}
+  .CalendarDay--selected-start,
+  .CalendarDay--selected-end,
+  .CalendarDay--selected {
+    background-color: #3ed2a4;
+    color: #ffffff;
+  }
 
-.CalendarDay--selected-start {
-  border-radius: 7px 0 0 7px;
-}
+  .CalendarDay--selected-start {
+    border-radius: 7px 0 0 7px;
+  }
 
-.CalendarDay--selected-end {
-  border-radius: 0 7px 7px 0;
-}
+  .CalendarDay--selected-end {
+    border-radius: 0 7px 7px 0;
+  }
 
-.CalendarDay--selected-span {
-  background-color: #eeeeee;
-}
+  .CalendarDay--selected-span {
+    background-color: #eeeeee;
+  }
 
-.CalendarMonth--horizontal .CalendarMonth__caption,
-.CalendarMonth--vertical .CalendarMonth__caption {
-  padding: 15px 0 46px;
-}
+  .CalendarMonth--horizontal .CalendarMonth__caption,
+  .CalendarMonth--vertical .CalendarMonth__caption {
+    padding: 15px 0 46px;
+  }
 
-.CalendarDay--selected-span.CalendarDay:active {
-  background-color: rgba(62, 210, 164, 0.5);
-  border: none;
-}
+  .CalendarDay--selected-span.CalendarDay:active {
+    background-color: rgba(62, 210, 164, 0.5);
+    border: none;
+  }
 
-.CalendarMonth table {
-  position: relative;
-}
+  .CalendarMonth table {
+    position: relative;
+  }
 
-.CalendarMonth table:before {
-  content: "";
-  display: block;
-  height: 220px;
-  width: 1px;
-  background-color: rgba(0, 0, 0, 0.05);
-  transform: translateX(-12px) translateY(-70px);
-  position: absolute;
-  opacity: 0;
-  transition: opacity 100ms ease-in-out;
-}
+  .CalendarMonth table:before {
+    content: "";
+    display: block;
+    height: 220px;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(-12px) translateY(-70px);
+    position: absolute;
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+  }
 
-.CalendarMonth[data-visible="true"] table:before {
-  opacity: 1;
-}
+  .CalendarMonth[data-visible="true"] table:before {
+    opacity: 1;
+  }
 
-.CalendarMonth[data-visible="false"] + .CalendarMonth table:before {
-  opacity: 0;
-}
+  .CalendarMonth[data-visible="false"] + .CalendarMonth table:before {
+    opacity: 0;
+  }
 
-.CalendarMonth[data-visible="true"] .CalendarMonth__caption {
-  opacity: 1;
-}
+  .CalendarMonth[data-visible="true"] .CalendarMonth__caption {
+    opacity: 1;
+  }
 
-.CalendarMonth[data-visible="false"]:last-child .CalendarMonth__caption {
-  opacity: 0;
-}
+  .CalendarMonth[data-visible="false"]:last-child .CalendarMonth__caption {
+    opacity: 0;
+  }
 
-.CalendarMonth__caption {
-  opacity: 0;
-  transition: opacity 100ms ease-in-out;
+  .CalendarMonth__caption {
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+  }
 }

@@ -134,12 +134,12 @@ export default class DateSelector extends Component {
 
   render () {
     return (
-      <div className={style.container}>
+      <div className={`ReactDates-overrides ${style.container}`}>
         <div className={style.sidebar}>
           <ol>
             {this.renderPresets(this.props.presets)}
             <li>
-              <h2>Personalizado</h2>
+              <h2>Personalizado:</h2>
               <ol>
                 {this.renderPreset({
                   title: 'Dia',
@@ -170,6 +170,13 @@ export default class DateSelector extends Component {
             />
           </div>
           <div className={style.actions}>
+            <caption>
+              {this.state.dates.end
+                ? `${this.state.dates.end.diff(this.state.dates.start, 'days')} `
+                : '0 '
+              }
+              dias selecionados
+            </caption>
             <Button
               variant="clean"
               color="gray"
