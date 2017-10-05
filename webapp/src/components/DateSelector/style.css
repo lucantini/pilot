@@ -1,0 +1,76 @@
+@import "../../styles/typography.css";
+@import "../../styles/spacing.css";
+@import "../../styles/colors.css";
+@import "./react-dates.scss";
+@import "./properties.css";
+
+.container {
+  display: inline-flex;
+  border: var(--date-selector-border);
+  border-radius: var(--date-selector-border-radius);
+}
+
+.sidebar {
+  background-color: var(--date-selector-sidebar-background);
+  padding: var(--spacing-medium);
+  border-right: var(--date-selector-sidebar-border);
+}
+
+.sidebar h2 {
+  font-size: 10px;
+  font-weight: 200;
+  font-style: normal;
+  text-transform: uppercase;
+  margin: var(--spacing-small) 0;
+  padding-left: var(--spacing-small);
+}
+
+.sidebar li,
+.sidebar ol {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  margin-top: var(--spacing-small);
+}
+
+.sidebar li:first-child {
+  margin-top: unset;
+}
+
+.sidebar input {
+  appearance: none;
+  position: absolute;
+}
+
+.sidebar label {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: var(--title-font-family);
+  font-size: 12px;
+  padding-left: calc(var(--spacing-small) - 2px);
+  border-left: 2px solid transparent;
+}
+
+.sidebar input:checked ~ label {
+  color: var(--color-green-accent-100);
+  border-left: 2px solid var(--color-light-green-accent-100);
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.actions {
+  padding: var(--spacing-small);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

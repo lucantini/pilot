@@ -1,0 +1,16 @@
+@import "../../styles/colors.css";
+
+:root {
+  --date-selector-background: #f5f5f5;
+  --date-selector-border-radius: 3px;
+  --date-selector-border: 1px solid #e1e1e1;
+
+  --date-selector-sidebar-background: #f5f5f5;
+  --date-selector-sidebar-border: 1px solid #e1e1e1;
+
+  --date-picker-font-size: 14px;
+  --date-picker-icon-font-size: 18px;
+  --date-picker-week-name-color: #7ddfac;
+  --date-picker-week-name-background: #f5f5f5;
+  --date-picker-top: 45px;
+}
