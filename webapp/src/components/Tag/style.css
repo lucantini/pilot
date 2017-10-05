@@ -5,16 +5,16 @@
 .tag {
   border: none;
   border-radius: 3px;
-  font-family: var(--button-font-family);
-  font-weight: var(--button-font-weight);
-  font-style: var(--button-font-style);
-  font-size: var(--button-font-size-micro);
+  font-family: var(--tag-font-family);
+  font-weight: var(--tag-font-weight);
+  font-style: var(--tag-font-style);
+  font-size: var(--tag-font-size-micro);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--color-light-silver-200);
   border: dashed 1px;
   border-color: var(--color-light-silver-200);
-  padding: var(--button-padding-micro);
+  padding: var(--tag-padding-micro);
   background-color: transparent;
   background-image: none;
   cursor: default;
