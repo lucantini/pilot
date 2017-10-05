@@ -246,6 +246,7 @@ class Filters extends Component {
                     variant="outline"
                     size="small"
                     onClick={() => this.handleCleanFilters()}
+                    className={style.actionButton}
                   >
                     Limpar filtros
                   </Button>
@@ -253,6 +254,7 @@ class Filters extends Component {
                   <Button
                     type="submit"
                     size="small"
+                    className={style.actionButton}
                   >
                     {
                       this.state.submitted

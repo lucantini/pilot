@@ -44,7 +44,7 @@
   margin-bottom: var(--spacing-small);
 }
 
-.actionsSpacing > button {
+.actionButton {
   margin-left: var(--spacing-small);
 }
 
@@ -56,7 +56,7 @@
   overflow-x: initial;
 }
 
-.spaceButtons > button {
-  margin-bottom: 6px;
-  margin-right: 6px;
+.spaceButtons > div {
+  margin-bottom: var(--spacing-small);
+  margin-right:  var(--spacing-small);
 }
