@@ -15,11 +15,22 @@ function Button ({ className, onClick, variant, base, color, size, children, typ
     stylesheet[size]
   )
 
-  return (
-    <button className={buttonClasses} onClick={onClick} type={type}>
-      {children}
-    </button>
-  )
+  let button
+  if (onClick) {
+    button = (
+      <button className={buttonClasses} onClick={onClick} type={type}>
+        {children}
+      </button>
+    )
+  } else {
+    button = (
+      <div className={buttonClasses}>
+        {children}
+      </div>
+    )
+  }
+
+  return button
 }
 
 Button.propTypes = {

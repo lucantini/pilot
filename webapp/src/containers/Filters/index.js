@@ -36,6 +36,7 @@ import DatePicker from '../../components/Toolbar/FancyDatePicker'
 import SearchField from '../../components/Toolbar/SearchField'
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button'
+import Tag from '../../components/Tag'
 
 import {
   Grid,
@@ -159,14 +160,11 @@ class Filters extends Component {
     )(withLabel)
 
     return map(({ label, value }) => (
-      <Button
+      <Tag
         key={value}
         variant="dashed"
-        size="micro"
-        color="silver"
-      >
-        {label}
-      </Button>
+        text={label}
+      />
     ), selectedFilters)
   }
 
