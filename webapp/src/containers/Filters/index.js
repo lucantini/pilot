@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import IconFunnel from 'react-icons/lib/fa/filter'
+import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
+import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
+
 import {
   __,
   contains,
@@ -75,7 +78,9 @@ class Filters extends Component {
   }
 
   handleVisibility () {
-    this.setState({ showContent: !this.state.showContent })
+    this.setState({
+      showContent: !this.state.showContent,
+    })
   }
 
   handleDatePickerChange (selectedDate) {
@@ -132,9 +137,8 @@ class Filters extends Component {
 
     this.setState({
       submitted: true,
+      showContent: true,
     })
-
-    this.handleVisibility()
 
     this.props.onFilter(selectedFilters)
   }
@@ -199,16 +203,16 @@ class Filters extends Component {
                 </Col>
               </Row>
 
-              {!showContent &&
-                <Row>
-                  <Col>
-                    {this.createTags()}
-                  </Col>
-                </Row>
-              }
+              <div className={style.collapse}>
+                <Button
+                  className={style.collapseButton}
+                  variant="clean"
+                  onClick={this.handleVisibility}
+                >
+                  Meh {showContent ? <IconArrowDown /> : <IconArrowUp />}
+                </Button>
 
-              {showContent &&
-                <Row>
+                <Row toggleChildren={showContent} className={style.paddingTop}>
                   {this.props.sections.map(({ name, items, key }) => (
                     <Col palm={12} tablet={6} desk={4} tv={4} key={name}>
                       <h4 className={style.heading}>{name}</h4>
@@ -225,38 +229,44 @@ class Filters extends Component {
                     </Col>
                   ))}
                 </Row>
+              </div>
+
+              {this.state.showContent && this.createTags() &&
+                <Row className={style.paddingTop}>
+                  <Col className={style.spaceButtons}>
+                    {this.createTags()}
+                  </Col>
+                </Row>
               }
             </Grid>
           </CardContent>
 
-          { showContent &&
-            <CardActions>
-              <Grid>
-                <Row flex>
-                  <Col alignEnd className={style.actionsSpacing}>
-                    <Button
-                      variant="outline"
-                      size="small"
-                      onClick={this.handleCleanFilters}
-                    >
-                      Limpar filtros
-                    </Button>
+          <CardActions>
+            <Grid>
+              <Row flex>
+                <Col alignEnd className={style.actionsSpacing}>
+                  <Button
+                    variant="outline"
+                    size="small"
+                    onClick={() => this.handleCleanFilters()}
+                  >
+                    Limpar filtros
+                  </Button>
 
-                    <Button
-                      type="submit"
-                      size="small"
-                    >
-                      {
-                        this.state.submitted
-                          ? 'Filtrar'
-                          : 'Aplicar filtros'
-                      }
-                    </Button>
-                  </Col>
-                </Row>
-              </Grid>
-            </CardActions>
-          }
+                  <Button
+                    type="submit"
+                    size="small"
+                  >
+                    {
+                      this.state.submitted
+                        ? 'Filtrar'
+                        : 'Aplicar filtros'
+                    }
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+          </CardActions>
         </form>
       </Card>
     )

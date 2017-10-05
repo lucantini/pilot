@@ -3,6 +3,38 @@
 @import "../../styles/spacing.css";
 @import "../../styles/media.css";
 
+.collapse {
+  background-color: #eeeeee;
+  padding: var(--spacing-medium);
+  width: 100%;
+}
+
+.collapseButton {
+  font-size: var(--display-4);
+  color: #999999;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+}
+
+.collapseButton svg {
+  color: #3ed2a4;
+  font-size: 24px;
+}
+
+.collapseButton:focus {
+  box-shadow: none;
+}
+
+.paddingTop {
+  padding-top: var(--spacing-medium);
+}
+
 .heading {
   margin: 0;
   font-family: var(--title-font-family);
@@ -24,3 +56,7 @@
   overflow-x: initial;
 }
 
+.spaceButtons > button {
+  margin-bottom: 6px;
+  margin-right: 6px;
+}

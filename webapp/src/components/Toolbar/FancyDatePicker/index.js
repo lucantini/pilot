@@ -31,7 +31,7 @@ class DatePicker extends React.Component {
       value: '',
       startDate: null,
       endDate: null,
-      focusedInput: 'startDate',
+      focusedInput: null,
     }
 
     this.name = shortid.generate()

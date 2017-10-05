@@ -14,7 +14,6 @@
   background-color: var(--toolitem-background-color);
   border-radius: 3px;
   border: 1px solid var(--toolitem-border-color);
-  z-index: 0;
   padding: 1px;
   box-shadow: var(--toolitem-box-shadow);
   font-family: var(--toolitem-font-family);
@@ -42,11 +41,11 @@
 }
 
 .toolbar > div:nth-child(1) {
-  width: calc(100% / 12 * 3)
+  width: calc(100% / 12 * 3);
 }
 
 .toolbar > div:nth-child(2) {
-  width: calc(100% / 12 * 9)
+  width: calc(100% / 12 * 9);
 }
 
 .toolbar > div {

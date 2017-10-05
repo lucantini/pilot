@@ -46,10 +46,12 @@ export const Grid = ({ children, className }) => (
   </div>
 )
 
-export const Row = ({ children, flex, stretch, className }) => (
-  <div className={rowClassNames({ flex, stretch, className })}>
-    {children}
-  </div>
+export const Row = ({ children, flex, stretch, className, toggleChildren }) => (
+  toggleChildren ? null : (
+    <div className={rowClassNames({ flex, stretch, className })}>
+      {children}
+    </div>
+  )
 )
 
 export const Col = ({ children, desk, tv, tablet, palm, alignEnd, className }) => (
@@ -73,6 +75,7 @@ Row.propTypes = {
   flex: bool,
   stretch: bool,
   className: string,
+  toggleChildren: bool,
 }
 
 Row.defaultProps = {
@@ -80,6 +83,7 @@ Row.defaultProps = {
   flex: false,
   stretch: false,
   className: null,
+  toggleChildren: false,
 }
 
 Col.propTypes = {
