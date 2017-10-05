@@ -1,4 +1,5 @@
 import './Button'
+import './Tag'
 import './Card'
 import './Colors'
 import './Alert'
