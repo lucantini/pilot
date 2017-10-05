@@ -5,12 +5,12 @@ import Button from '../../components/Button'
 
 import style from './style.css'
 
-const Tag = ({ text, size }) => (
+const Tag = ({ text }) => (
   <div>
     <Button
       variant="dashed"
       color="silver"
-      size={size}
+      size="micro"
       className={style.tag}
     >
       {text}
@@ -20,13 +20,6 @@ const Tag = ({ text, size }) => (
 
 Tag.propTypes = {
   text: PropTypes.string.isRequired,
-  size: PropTypes.oneOf([
-    'micro', 'tiny', 'small', 'medium', 'large',
-  ]),
-}
-
-Tag.defaultProps = {
-  size: 'micro',
 }
 
 export default Tag

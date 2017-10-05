@@ -9824,6 +9824,16 @@ exports[`Storyshots TabBar All styles 1`] = `
 </div>
 `;
 
+exports[`Storyshots Tags default 1`] = `
+<div>
+  <div
+    className=""
+  >
+    Curta aqui
+  </div>
+</div>
+`;
+
 exports[`Storyshots Toolbar DateRange 1`] = `
 <div>
   <div>

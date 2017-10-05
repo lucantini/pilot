@@ -162,7 +162,6 @@ class Filters extends Component {
     return map(({ label, value }) => (
       <Tag
         key={value}
-        variant="dashed"
         text={label}
       />
     ), selectedFilters)
