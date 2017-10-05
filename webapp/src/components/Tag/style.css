@@ -1,3 +1,26 @@
+@import "../../styles/colors.css";
+@import "../../styles/typography.css";
+@import "./properties.css";
+
 .tag {
+  border: none;
+  border-radius: 3px;
+  font-family: var(--button-font-family);
+  font-weight: var(--button-font-weight);
+  font-style: var(--button-font-style);
+  font-size: var(--button-font-size-micro);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-light-silver-200);
+  border: dashed 1px;
+  border-color: var(--color-light-silver-200);
+  padding: var(--button-padding-micro);
+  background-color: transparent;
+  background-image: none;
   cursor: default;
+}
+
+.tag:hover {
+  color: var(--color-light-silver-300);
+  border-color: var(--color-light-silver-300);
 }
