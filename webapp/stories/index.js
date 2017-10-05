@@ -1,3 +1,5 @@
+import './style.css'
+
 import './Button'
 import './Tag'
 import './Card'
