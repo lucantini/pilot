@@ -130,10 +130,11 @@ class Filters extends Component {
       }
     )
 
-
     this.setState({
       submitted: true,
     })
+
+    this.handleVisibility()
 
     this.props.onFilter(selectedFilters)
   }
