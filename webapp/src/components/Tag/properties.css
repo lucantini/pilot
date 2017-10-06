@@ -1,6 +1,5 @@
 :root {
   --tag-font-family: var(--title-font-family);
-  --tag-font-weight: var(--title-font-weight);
   --tag-font-style: var(--title-font-style);
 
   --tag-font-size-micro: 12px;
