@@ -295,10 +295,10 @@ DateSelector.propTypes = {
     key: string,
     title: string,
     date: string,
-    items: arrayOf({
+    items: arrayOf(shape({
       title: string,
       date: func,
-    }),
+    })),
   })),
 }
 
