@@ -36,7 +36,7 @@ export default class DateSelector extends Component {
       focusedInput: START_DATE,
     }
 
-    this.dateSelectorId = `dateselector-${shortid()}`
+    this.instanceId = `dateselector-${shortid()}`
 
     this.handleFocusChange = this.handleFocusChange.bind(this)
     this.handleDatesChange = this.handleDatesChange.bind(this)
@@ -46,7 +46,8 @@ export default class DateSelector extends Component {
 
   componentWillReceiveProps ({ presets }) {
     if (presets && presets.length > 0) {
-      this.setState({ preset: presets[0].title })
+      const { key, date } = presets[0]
+      this.handleDatesChange(date(), key)
     }
   }
 
@@ -62,13 +63,16 @@ export default class DateSelector extends Component {
     this.setState({ focusedInput })
   }
 
-  handleDatesChange (dates) {
+  handleDatesChange (dates, presetKey) {
     if (is(Number, dates)) {
+      const preset = presetKey || (dates > 1 ? 'range' : 'day')
+
       this.setState({
         dates: {
           start: moment().add(-dates, 'day').startOf('day'),
           end: moment().endOf('day'),
         },
+        preset,
       })
 
       return
@@ -76,12 +80,12 @@ export default class DateSelector extends Component {
 
     const { startDate: start, endDate: end } = dates
 
-    this.setState({ dates: { start, end } })
-  }
+    const preset = presetKey || 'range'
 
-  handlePresetChange (preset, callback) {
-    this.setState({ preset })
-    callback()
+    this.setState({
+      dates: { start, end },
+      preset,
+    })
   }
 
   handleConfirm () {
@@ -92,19 +96,21 @@ export default class DateSelector extends Component {
     this.props.onCancel()
   }
 
-  renderPreset ({ title, onClick }) {
-    const name = `${this.dateSelectorId}-radiogroup`
-    const id = `${this.dateSelectorId}-radio-id-${title}`
+  renderPreset ({ title, key, date }) {
     const { preset } = this.state
+
+    const group = `${this.instanceId}-presets`
+    const selectedId = `${this.instanceId}-preset-${preset}`
+    const id = `${this.instanceId}-preset-${key}`
 
     return (
       <li>
         <input
           type="radio"
-          name={name}
+          name={group}
           id={id}
-          onClick={evt => this.handlePresetChange(title, onClick, evt)}
-          checked={preset === title}
+          onClick={() => this.handleDatesChange(date(), key)}
+          checked={selectedId === id}
         />
         <label htmlFor={id}>
           {title}
@@ -114,7 +120,7 @@ export default class DateSelector extends Component {
   }
 
   renderPresets (presets) {
-    return presets.map(({ date, items, title }) => {
+    return presets.map(({ date, items, key, title }) => {
       if (items) {
         return (
           <ol>
@@ -125,74 +131,96 @@ export default class DateSelector extends Component {
       }
 
       return this.renderPreset({
-        onClick: () => this.handleDatesChange(date()),
+        date,
         title,
+        key,
       })
     })
   }
 
+  renderPicker () {
+    return (
+      <div className="ReactDates-overrides">
+        <DayPickerRangeController
+          numberOfMonths={2}
+          daySize={40}
+          focusedInput={this.state.focusedInput}
+          onFocusChange={this.handleFocusChange}
+          navPrev={<IconArrowLeft />}
+          navNext={<IconArrowRight />}
+          customArrowIcon={<i className={style.calendarCustomArrow} />}
+          horizontalMargin={24 / 2}
+          startDate={this.state.dates.start}
+          endDate={this.state.dates.end}
+          onDatesChange={this.handleDatesChange}
+        />
+      </div>
+    )
+  }
+
+  renderActions () {
+    const { start, end } = this.state.dates
+
+    const daysCount = end ? end.diff(start, 'days') : 0
+
+    return (
+      <div className={style.actions}>
+        <caption>
+          {daysCount === 0 ? 'Nenhum dia ou período selecionado' : null}
+          {daysCount === 1 ? `${daysCount} dia selecionado` : null}
+          {daysCount > 1 ? `${daysCount} dias selecionados` : null}
+        </caption>
+        <Button
+          variant="clean"
+          color="gray"
+          size="small"
+          onClick={this.handleCancel}
+        >
+          Cancelar
+        </Button>
+        <Button
+          variant="clean"
+          size="small"
+          onClick={this.handleConfirm}
+        >
+          Confirmar Período
+        </Button>
+      </div>
+    )
+  }
+
+  renderSidebar () {
+    return (
+      <div className={style.sidebar}>
+        <ol>
+          {this.renderPresets(this.props.presets)}
+          <li>
+            <h2>Personalizado:</h2>
+            <ol>
+              {this.renderPreset({
+                key: 'single',
+                title: 'Dia',
+                date: () => 1,
+              })}
+              {this.renderPreset({
+                key: 'range',
+                title: 'Período',
+                date: () => 7,
+              })}
+            </ol>
+          </li>
+        </ol>
+      </div>
+    )
+  }
 
   render () {
     return (
-      <div className={`ReactDates-overrides ${style.container}`}>
-        <div className={style.sidebar}>
-          <ol>
-            {this.renderPresets(this.props.presets)}
-            <li>
-              <h2>Personalizado:</h2>
-              <ol>
-                {this.renderPreset({
-                  title: 'Dia',
-                  onClick: () => this.handleDatesChange(1),
-                })}
-                {this.renderPreset({
-                  title: 'Período',
-                  onClick: () => this.handleDatesChange(7),
-                })}
-              </ol>
-            </li>
-          </ol>
-        </div>
+      <div className={style.container}>
+        {this.renderSidebar()}
         <div className={style.stage}>
-          <div>
-            <DayPickerRangeController
-              numberOfMonths={2}
-              daySize={40}
-              focusedInput={this.state.focusedInput}
-              onFocusChange={this.handleFocusChange}
-              navPrev={<IconArrowLeft />}
-              navNext={<IconArrowRight />}
-              customArrowIcon={<i className={style.calendarCustomArrow} />}
-              horizontalMargin={24 / 2}
-              startDate={this.state.dates.start}
-              endDate={this.state.dates.end}
-              onDatesChange={this.handleDatesChange}
-            />
-          </div>
-          <div className={style.actions}>
-            <caption>
-              {this.state.dates.end
-                ? `${this.state.dates.end.diff(this.state.dates.start, 'days')} `
-                : '0 '
-              }
-              dias selecionados
-            </caption>
-            <Button
-              variant="clean"
-              color="gray"
-              size="small"
-              onClick={this.handleCancel}
-            >
-              Cancelar
-            </Button>
-            <Button
-              variant="clean"
-              size="small"
-              onClick={this.handleConfirm}
-            >
-              Confirmar Período
-            </Button>
-          </div>
+          {this.renderPicker()}
+          {this.renderActions()}
         </div>
       </div>
     )
@@ -203,6 +231,7 @@ DateSelector.propTypes = {
   onDatesChange: func,
   onCancel: func,
   presets: arrayOf(shape({
+    key: string,
     title: string,
     date: string,
     items: arrayOf({
