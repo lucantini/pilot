@@ -6,18 +6,13 @@ import {
 
 import {
   func,
-  bool,
 } from 'prop-types'
 
 import moment from 'moment'
 
-import {
-  DateRangePicker,
-} from 'react-dates'
-
 import IconCalendar from 'react-icons/lib/fa/calendar'
-import IconArrowLeft from 'react-icons/lib/fa/angle-left'
-import IconArrowRight from 'react-icons/lib/fa/angle-right'
+
+import MaskedInput from 'react-maskedinput'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
@@ -36,10 +31,12 @@ class DatePicker extends React.Component {
 
     this.name = shortid.generate()
 
-    this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
-  handleChange (value) {
+  handleDateChange (period, value) {
+    console.log(value)
+
     const response = {
       value,
     }
@@ -57,10 +54,6 @@ class DatePicker extends React.Component {
   }
 
   render () {
-    const {
-      disabled,
-    } = this.props
-
     return (
       <div className={toolItemStyle.root}>
         <label
@@ -72,20 +65,16 @@ class DatePicker extends React.Component {
           </span>
 
           <div>
-            <DateRangePicker
-              disabled={disabled}
-              daySize={40}
-              startDate={this.state.startDate}
-              endDate={this.state.endDate}
-              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
-              focusedInput={this.state.focusedInput}
-              onFocusChange={focusedInput => this.setState({ focusedInput })}
-              renderCalendarInfo={() => <div>What?</div>}
-              navPrev={<IconArrowLeft />}
-              navNext={<IconArrowRight />}
-              customArrowIcon={<i className={style.calendarCustomArrow} />}
-              horizontalMargin={24 / 2}
-              hideKeyboardShortcutsPanel
+            <MaskedInput
+              mask="11/11/1111"
+              name="startDate"
+              onChange={value => this.handleDateChange('startDate', value)}
+            />
+
+            <MaskedInput
+              mask="11/11/1111"
+              name="endDate"
+              onChange={value => this.handleDateChange('endDate', value)}
             />
           </div>
         </label>
@@ -96,11 +85,6 @@ class DatePicker extends React.Component {
 
 DatePicker.propTypes = {
   onChange: func.isRequired,
-  disabled: bool,
-}
-
-DatePicker.defaultProps = {
-  disabled: false,
 }
 
 export default DatePicker
