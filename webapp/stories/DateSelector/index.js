@@ -10,11 +10,6 @@ import style from './style.css'
 
 const presets = [
   {
-    key: 'today',
-    title: 'Hoje',
-    date: () => 1,
-  },
-  {
     title: 'Ultimos:',
     items: [
       {

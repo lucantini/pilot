@@ -6,7 +6,10 @@ import {
   shape,
 } from 'prop-types'
 
-import { DayPickerRangeController } from 'react-dates'
+import {
+  DayPickerRangeController,
+  DayPickerSingleDateController,
+} from 'react-dates'
 
 import { is } from 'ramda'
 
@@ -44,10 +47,11 @@ export default class DateSelector extends Component {
     this.handleCancel = this.handleCancel.bind(this)
   }
 
-  componentWillReceiveProps ({ presets }) {
+  componentDidMount () {
+    const { presets } = this.props
+
     if (presets && presets.length > 0) {
-      const { key, date } = presets[0]
-      this.handleDatesChange(date(), key)
+      this.handleDatesChange(0, 'today')
     }
   }
 
@@ -65,12 +69,42 @@ export default class DateSelector extends Component {
 
   handleDatesChange (dates, presetKey) {
     if (is(Number, dates)) {
-      const preset = presetKey || (dates > 1 ? 'range' : 'day')
+      if (dates === 0) {
+        const preset = presetKey || 'single'
+
+        this.setState({
+          dates: {
+            start: moment().startOf('day'),
+            end: moment().endOf('day'),
+          },
+          preset,
+        })
+
+        return
+      }
+
+      const preset = presetKey || 'range'
 
       this.setState({
         dates: {
-          start: moment().add(-dates, 'day').startOf('day'),
+          start: moment().subtract(dates, 'day').startOf('day'),
           end: moment().endOf('day'),
+        },
+        preset,
+      })
+
+      return
+    }
+
+    if (moment.isMoment(dates)) {
+      const sameDay = moment().isSame(dates, 'day')
+
+      const preset = presetKey || (sameDay ? 'today' : 'single')
+
+      this.setState({
+        dates: {
+          start: dates.startOf('day'),
+          end: dates.endOf('day'),
         },
         preset,
       })
@@ -141,27 +175,49 @@ export default class DateSelector extends Component {
   renderPicker () {
     return (
       <div className="ReactDates-overrides">
-        <DayPickerRangeController
-          numberOfMonths={2}
-          daySize={40}
-          focusedInput={this.state.focusedInput}
-          onFocusChange={this.handleFocusChange}
-          navPrev={<IconArrowLeft />}
-          navNext={<IconArrowRight />}
-          customArrowIcon={<i className={style.calendarCustomArrow} />}
-          horizontalMargin={24 / 2}
-          startDate={this.state.dates.start}
-          endDate={this.state.dates.end}
-          onDatesChange={this.handleDatesChange}
-        />
+        {['single', 'today'].includes(this.state.preset)
+          ? (
+            <DayPickerSingleDateController
+              numberOfMonths={2}
+              daySize={40}
+              navPrev={<IconArrowLeft />}
+              navNext={<IconArrowRight />}
+              customArrowIcon={<i className={style.calendarCustomArrow} />}
+              horizontalMargin={24 / 2}
+              date={this.state.dates.start}
+              onDateChange={this.handleDatesChange}
+            />
+          ) : (
+            <DayPickerRangeController
+              numberOfMonths={2}
+              daySize={40}
+              focusedInput={this.state.focusedInput}
+              onFocusChange={this.handleFocusChange}
+              navPrev={<IconArrowLeft />}
+              navNext={<IconArrowRight />}
+              customArrowIcon={<i className={style.calendarCustomArrow} />}
+              horizontalMargin={24 / 2}
+              startDate={this.state.dates.start}
+              endDate={this.state.dates.end}
+              onDatesChange={this.handleDatesChange}
+            />
+          )
+        }
       </div>
     )
   }
 
   renderActions () {
     const { start, end } = this.state.dates
+    const { preset } = this.state
 
-    const daysCount = end ? end.diff(start, 'days') : 0
+    let daysCount = 0
+
+    if (['single', 'today'].includes(preset)) {
+      daysCount = 1
+    } else if (end) {
+      daysCount = end.diff(start, 'days')
+    }
 
     return (
       <div className={style.actions}>
@@ -193,6 +249,11 @@ export default class DateSelector extends Component {
     return (
       <div className={style.sidebar}>
         <ol>
+          {this.renderPreset({
+            key: 'today',
+            title: 'Hoje',
+            date: () => 0,
+          })}
           {this.renderPresets(this.props.presets)}
           <li>
             <h2>Personalizado:</h2>
