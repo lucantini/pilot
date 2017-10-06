@@ -1,7 +1,7 @@
 @import "./properties.css";
 
 .root {
-  font-size: 14px;
+  font-size: var(--date-input-font-size);
 }
 
 .root,
@@ -27,10 +27,3 @@
   font-size: 14px;
 }
 
-.calendarCustomArrow {
-  height: 18px;
-  width: 2px;
-  background-color: #eeeeee;
-  display: block;
-  margin-left: 10px;
-}

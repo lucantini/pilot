@@ -3,5 +3,5 @@
 @import "../properties.css";
 
 :root {
-  --date-range-label-padding: 7px 19px;
+  --date-input-font-size: 14px;
 }

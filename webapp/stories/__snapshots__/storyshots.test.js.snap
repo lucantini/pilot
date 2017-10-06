@@ -416,84 +416,6 @@ exports[`Storyshots Button All styles 1`] = `
       </button>
     </div>
     <p>
-      Dashed
-    </p>
-    <div
-      className={undefined}
-      style={undefined}
-    >
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-    </div>
-    <p>
       Clean
     </p>
     <div
@@ -744,84 +666,6 @@ exports[`Storyshots Button All styles 1`] = `
     </div>
     <p>
       Outlined
-    </p>
-    <div
-      className={undefined}
-      style={undefined}
-    >
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-      <button
-        className=""
-        onClick={[Function]}
-        type="button"
-      >
-        Button Label
-      </button>
-    </div>
-    <p>
-      Dashed
     </p>
     <div
       className={undefined}
@@ -3918,91 +3762,30 @@ exports[`Storyshots Filters Default 1`] = `
                       </svg>
                     </span>
                     <div>
-                      <div
-                        className="DateRangePicker"
-                      >
-                        <div>
-                          <div
-                            className="DateRangePickerInput"
-                          >
-                            <div
-                              className="DateInput DateInput--open-down"
-                            >
-                              <input
-                                aria-describedby="DateInput__screen-reader-message-startDate"
-                                aria-label="Start Date"
-                                autoComplete="off"
-                                className="DateInput__input needsclick"
-                                disabled={false}
-                                id="startDate"
-                                name="startDate"
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyDown={[Function]}
-                                placeholder="Start Date"
-                                readOnly={false}
-                                required={false}
-                                type="text"
-                                value=""
-                              />
-                              <p
-                                className="screen-reader-only"
-                                id="DateInput__screen-reader-message-startDate"
-                              >
-                                Press the down arrow key to interact with the calendar and
-  select a date. Press the question mark key to get the keyboard shortcuts for changing dates.
-                              </p>
-                              <div
-                                className="DateInput__display-text"
-                              >
-                                Start Date
-                              </div>
-                            </div>
-                            <div
-                              aria-hidden="true"
-                              className="DateRangePickerInput__arrow"
-                              role="presentation"
-                            >
-                              <i
-                                className={undefined}
-                              />
-                            </div>
-                            <div
-                              className="DateInput DateInput--open-down"
-                            >
-                              <input
-                                aria-describedby="DateInput__screen-reader-message-endDate"
-                                aria-label="End Date"
-                                autoComplete="off"
-                                className="DateInput__input needsclick"
-                                disabled={false}
-                                id="endDate"
-                                name="endDate"
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyDown={[Function]}
-                                placeholder="End Date"
-                                readOnly={false}
-                                required={false}
-                                type="text"
-                                value=""
-                              />
-                              <p
-                                className="screen-reader-only"
-                                id="DateInput__screen-reader-message-endDate"
-                              >
-                                Press the down arrow key to interact with the calendar and
-  select a date. Press the question mark key to get the keyboard shortcuts for changing dates.
-                              </p>
-                              <div
-                                className="DateInput__display-text"
-                              >
-                                End Date
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <input
+                        mask="11/11/1111"
+                        maxLength={10}
+                        name="startDate"
+                        onChange={[Function]}
+                        onKeyDown={[Function]}
+                        onKeyPress={[Function]}
+                        onPaste={[Function]}
+                        placeholder="__/__/____"
+                        size={10}
+                        value=""
+                      />
+                      <input
+                        mask="11/11/1111"
+                        maxLength={10}
+                        name="endDate"
+                        onChange={[Function]}
+                        onKeyDown={[Function]}
+                        onKeyPress={[Function]}
+                        onPaste={[Function]}
+                        placeholder="__/__/____"
+                        size={10}
+                        value=""
+                      />
                     </div>
                   </label>
                 </div>
@@ -9825,12 +9608,10 @@ exports[`Storyshots TabBar All styles 1`] = `
 `;
 
 exports[`Storyshots Tags default 1`] = `
-<div>
-  <div
-    className=""
-  >
-    Curta aqui
-  </div>
+<div
+  className={undefined}
+>
+  Curta aqui
 </div>
 `;
 

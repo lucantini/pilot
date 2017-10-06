@@ -16,9 +16,8 @@ import MaskedInput from 'react-maskedinput'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
-import './react-dates.scss'
 
-class DatePicker extends React.Component {
+class DateInput extends React.Component {
   constructor (props) {
     super(props)
 
@@ -35,8 +34,6 @@ class DatePicker extends React.Component {
   }
 
   handleDateChange (period, value) {
-    console.log(value)
-
     const response = {
       value,
     }
@@ -83,8 +80,8 @@ class DatePicker extends React.Component {
   }
 }
 
-DatePicker.propTypes = {
+DateInput.propTypes = {
   onChange: func.isRequired,
 }
 
-export default DatePicker
+export default DateInput

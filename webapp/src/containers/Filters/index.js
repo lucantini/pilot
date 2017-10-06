@@ -32,7 +32,7 @@ import {
   CardActions,
 } from '../../components/Card'
 
-import DatePicker from '../../components/Toolbar/FancyDatePicker'
+import DateInput from '../../components/Toolbar/DateInput'
 import SearchField from '../../components/Toolbar/SearchField'
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button'
@@ -59,7 +59,7 @@ class Filters extends Component {
     }
 
     this.handleVisibility = this.handleVisibility.bind(this)
-    this.handleDatePickerChange = this.handleDatePickerChange.bind(this)
+    this.handleDateInputChange = this.handleDateInputChange.bind(this)
     this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
     this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleCleanFilters = this.handleCleanFilters.bind(this)
@@ -84,7 +84,7 @@ class Filters extends Component {
     })
   }
 
-  handleDatePickerChange (selectedDate) {
+  handleDateInputChange (selectedDate) {
     this.setState({
       selectedDate,
       submitted: false,
@@ -185,9 +185,8 @@ class Filters extends Component {
               <Row flex className={style.customRow}>
                 <Col>
                   <Toolbar>
-                    <DatePicker
-                      onChange={this.handleDatePickerChange}
-                      selected={this.state.selectedDate.value}
+                    <DateInput
+                      onChange={this.handleDateInputChange}
                     />
 
                     <SearchField
