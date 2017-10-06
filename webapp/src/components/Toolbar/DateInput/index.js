@@ -6,6 +6,9 @@ import {
 
 import {
   func,
+  shape,
+  arrayOf,
+  string,
 } from 'prop-types'
 
 import moment from 'moment'
@@ -13,6 +16,8 @@ import moment from 'moment'
 import IconCalendar from 'react-icons/lib/fa/calendar'
 
 import MaskedInput from 'react-maskedinput'
+
+import DateSelector from '../../DateSelector'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
@@ -26,6 +31,7 @@ class DateInput extends React.Component {
       startDate: null,
       endDate: null,
       focusedInput: null,
+      showDateSelector: false,
     }
 
     this.name = shortid.generate()
@@ -51,6 +57,10 @@ class DateInput extends React.Component {
   }
 
   render () {
+    const {
+      showDateSelector,
+    } = this.state
+
     return (
       <div className={toolItemStyle.root}>
         <label
@@ -66,15 +76,28 @@ class DateInput extends React.Component {
               mask="11/11/1111"
               name="startDate"
               onChange={value => this.handleDateChange('startDate', value)}
+              onFocus={() => this.setState({ showDateSelector: true })}
             />
 
             <MaskedInput
               mask="11/11/1111"
               name="endDate"
               onChange={value => this.handleDateChange('endDate', value)}
+              onFocus={() => this.setState({ showDateSelector: true })}
             />
           </div>
         </label>
+
+        {showDateSelector ?
+          <div className={style.absolutePosition}>
+            <DateSelector
+              onDatesChange={this.handleDatesChange}
+              onCancel={this.handleCancel}
+              presets={this.props.presets}
+            />
+          </div>
+          : null
+        }
       </div>
     )
   }
@@ -82,6 +105,16 @@ class DateInput extends React.Component {
 
 DateInput.propTypes = {
   onChange: func.isRequired,
+  presets: arrayOf(shape({
+    key: string,
+    title: string,
+    date: func,
+    items: arrayOf({
+      title: string,
+      date: func,
+      key: string,
+    }),
+  })).isRequired,
 }
 
 export default DateInput

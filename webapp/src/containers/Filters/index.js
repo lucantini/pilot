@@ -46,6 +46,8 @@ import {
 
 import CheckboxGroup from '../../components/CheckboxGroup'
 
+import presets from '../../shared/date-presets'
+
 
 class Filters extends Component {
   constructor (props) {
@@ -173,7 +175,7 @@ class Filters extends Component {
     } = this.state
 
     return (
-      <Card>
+      <Card className={style.allowContentOverflow}>
         <form action="/" method="post" onSubmit={this.handleFiltersSubmit}>
           <CardTitle
             title="Filtros"
@@ -187,6 +189,7 @@ class Filters extends Component {
                   <Toolbar>
                     <DateInput
                       onChange={this.handleDateInputChange}
+                      presets={presets}
                     />
 
                     <SearchField

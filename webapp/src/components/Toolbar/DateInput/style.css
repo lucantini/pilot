@@ -27,3 +27,7 @@
   font-size: 14px;
 }
 
+.absolutePosition {
+  position: absolute;
+  top: 100%;
+}
