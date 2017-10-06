@@ -93,9 +93,9 @@
     color: #b2b2b2;
   }
 
-  .CalendarDay--selected-start,
-  .CalendarDay--selected-end,
-  .CalendarDay--selected {
+  .CalendarMonth .CalendarDay--selected-start,
+  .CalendarMonth .CalendarDay--selected-end,
+  .CalendarMonth .CalendarDay--selected {
     background-color: #3ed2a4;
     color: #ffffff;
   }
