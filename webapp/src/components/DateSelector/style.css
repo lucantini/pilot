@@ -6,6 +6,7 @@
 
 .container {
   display: inline-flex;
+  background: var(--date-selector-background);
   border: var(--date-selector-border);
   border-radius: var(--date-selector-border-radius);
 }

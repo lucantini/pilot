@@ -5,6 +5,7 @@
     border: none;
     box-shadow: none;
     font-weight: bold;
+    background: none;
   }
 
   .DateRangePicker {
@@ -49,7 +50,7 @@
   .DayPickerNavigation__next,
   .DayPickerNavigation__prev {
     border: 0;
-    background-color: #ffffff;
+    background-color: transparent;
     font-size: var(--date-picker-icon-font-size);
   }
 
@@ -93,11 +94,19 @@
     color: #b2b2b2;
   }
 
+  .CalendarMonthGrid {
+    background: none;
+  }
+
   .CalendarMonth .CalendarDay--selected-start,
   .CalendarMonth .CalendarDay--selected-end,
   .CalendarMonth .CalendarDay--selected {
     background-color: #3ed2a4;
     color: #ffffff;
+  }
+
+  .CalendarMonth .CalendarDay--selected {
+    border-radius: 7px;
   }
 
   .CalendarDay--selected-start {

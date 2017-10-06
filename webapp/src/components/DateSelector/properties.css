@@ -1,7 +1,7 @@
 @import "../../styles/colors.css";
 
 :root {
-  --date-selector-background: #f5f5f5;
+  --date-selector-background: #ffffff;
   --date-selector-border-radius: 3px;
   --date-selector-border: 1px solid #e1e1e1;
 
