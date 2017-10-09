@@ -11,7 +11,10 @@ import {
   DayPickerSingleDateController,
 } from 'react-dates'
 
-import { is } from 'ramda'
+import {
+  is,
+  merge,
+} from 'ramda'
 
 import IconArrowLeft from 'react-icons/lib/fa/angle-left'
 import IconArrowRight from 'react-icons/lib/fa/angle-right'
@@ -27,6 +30,55 @@ import style from './style.css'
 import './react-dates.scss'
 
 const START_DATE = 'startDate'
+
+const buildDatesState = (dates, presetKey) => {
+  if (is(Number, dates)) {
+    if (dates === 0) {
+      const preset = presetKey || 'single'
+
+      return {
+        dates: {
+          start: moment().startOf('day'),
+          end: moment().endOf('day'),
+        },
+        preset,
+      }
+    }
+
+    const preset = presetKey || 'range'
+
+    return {
+      dates: {
+        start: moment().subtract(dates, 'day').startOf('day'),
+        end: moment().endOf('day'),
+      },
+      preset,
+    }
+  }
+
+  if (moment.isMoment(dates)) {
+    const sameDay = moment().isSame(dates, 'day')
+
+    const preset = presetKey || (sameDay ? 'today' : 'single')
+
+    return {
+      dates: {
+        start: dates.startOf('day'),
+        end: dates.endOf('day'),
+      },
+      preset,
+    }
+  }
+
+  const { startDate: start, endDate: end } = dates
+
+  const preset = presetKey || 'range'
+
+  return {
+    dates: { start, end },
+    preset,
+  }
+}
 
 
 export default class DateSelector extends Component {
@@ -47,12 +99,18 @@ export default class DateSelector extends Component {
     this.handleCancel = this.handleCancel.bind(this)
   }
 
-  componentDidMount () {
-    const { presets } = this.props
+  componentWillReceiveProps ({ presets, focusedInput }) {
+    let state = {}
 
     if (presets && presets.length > 0) {
-      this.handleDatesChange(0, 'today')
+      state = merge(state, buildDatesState(0, 'today'))
     }
+
+    if (focusedInput) {
+      state = merge(state, { focusedInput })
+    }
+
+    this.setState(state)
   }
 
   handleFocusChange (focusedInput) {
@@ -61,65 +119,18 @@ export default class DateSelector extends Component {
         focusedInput: START_DATE,
       })
 
+      this.props.onFocusChange(START_DATE)
+
       return
     }
 
     this.setState({ focusedInput })
+    this.props.onFocusChange(focusedInput)
   }
 
   handleDatesChange (dates, presetKey) {
-    if (is(Number, dates)) {
-      if (dates === 0) {
-        const preset = presetKey || 'single'
-
-        this.setState({
-          dates: {
-            start: moment().startOf('day'),
-            end: moment().endOf('day'),
-          },
-          preset,
-        })
-
-        return
-      }
-
-      const preset = presetKey || 'range'
-
-      this.setState({
-        dates: {
-          start: moment().subtract(dates, 'day').startOf('day'),
-          end: moment().endOf('day'),
-        },
-        preset,
-      })
-
-      return
-    }
-
-    if (moment.isMoment(dates)) {
-      const sameDay = moment().isSame(dates, 'day')
-
-      const preset = presetKey || (sameDay ? 'today' : 'single')
-
-      this.setState({
-        dates: {
-          start: dates.startOf('day'),
-          end: dates.endOf('day'),
-        },
-        preset,
-      })
-
-      return
-    }
-
-    const { startDate: start, endDate: end } = dates
-
-    const preset = presetKey || 'range'
-
-    this.setState({
-      dates: { start, end },
-      preset,
-    })
+    const state = buildDatesState(dates, presetKey)
+    this.setState(state)
   }
 
   handleConfirm () {
@@ -289,6 +300,8 @@ export default class DateSelector extends Component {
 DateSelector.propTypes = {
   onDatesChange: func,
   onCancel: func,
+  onFocusChange: func,
+  focusedInput: string,
   presets: arrayOf(shape({
     key: string,
     title: string,
@@ -303,6 +316,8 @@ DateSelector.propTypes = {
 DateSelector.defaultProps = {
   onDatesChange: () => undefined,
   onCancel: () => undefined,
+  onFocusChange: () => undefined,
+  focusedInput: START_DATE,
   presets: [],
 }
 
