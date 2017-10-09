@@ -26,6 +26,7 @@ class DateInputExample extends React.Component {
         <DateInput
           presets={presets}
           onChange={this.handleDatesChange}
+          active={this.state.date}
         />
       </Toolbar>
     )

@@ -9,6 +9,7 @@ import {
   shape,
   arrayOf,
   string,
+  bool,
 } from 'prop-types'
 
 import moment from 'moment'
@@ -17,11 +18,20 @@ import IconCalendar from 'react-icons/lib/fa/calendar'
 
 import MaskedInput from 'react-maskedinput'
 import clickOutside from 'react-click-outside'
+import classNames from 'classnames'
 
 import DateSelector from '../../DateSelector'
 
 import style from './style.css'
 import toolItemStyle from '../style.css'
+
+const getInputClasses = (focused, active) => classNames(
+  toolItemStyle.root,
+  {
+    [toolItemStyle.focused]: focused,
+    [toolItemStyle.active]: active,
+  }
+)
 
 class DateInput extends React.Component {
   constructor (props) {
@@ -68,11 +78,16 @@ class DateInput extends React.Component {
       showDateSelector,
     } = this.state
 
+    const {
+      active,
+    } = this.props
+
     return (
-      <div className={toolItemStyle.root}>
+      <div className={getInputClasses(showDateSelector, active)}>
         <label
           className={style.label}
           htmlFor={this.name}
+
         >
           <span className={style.icon}>
             <IconCalendar />
@@ -81,22 +96,22 @@ class DateInput extends React.Component {
           <div className={style.flex}>
             <MaskedInput
               mask="11-11-1111"
-              name="startDate"
-              onChange={value => this.handleDateChange('startDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
               className={style.input}
-              placeholder="Inicio"
               placeholderChar=" "
+              name="startDate"
+              onChange={value => this.handleDateChange('startDate', value)}
+              placeholder="Inicio"
             />
 
             <MaskedInput
               mask="11-11-1111"
-              name="endDate"
-              onChange={value => this.handleDateChange('endDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
               className={style.input}
-              placeholder="Fim"
               placeholderChar=" "
+              name="endDate"
+              onChange={value => this.handleDateChange('endDate', value)}
+              placeholder="Fim"
             />
           </div>
         </label>
@@ -118,6 +133,7 @@ class DateInput extends React.Component {
 
 DateInput.propTypes = {
   onChange: func.isRequired,
+  active: bool.isRequired,
   presets: arrayOf(shape({
     key: string,
     title: string,
