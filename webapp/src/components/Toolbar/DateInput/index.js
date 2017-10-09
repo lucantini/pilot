@@ -85,6 +85,8 @@ class DateInput extends React.Component {
               onChange={value => this.handleDateChange('startDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
               className={style.input}
+              placeholder="Inicio"
+              placeholderChar=" "
             />
 
             <MaskedInput
@@ -93,6 +95,8 @@ class DateInput extends React.Component {
               onChange={value => this.handleDateChange('endDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
               className={style.input}
+              placeholder="Fim"
+              placeholderChar=" "
             />
           </div>
         </label>
