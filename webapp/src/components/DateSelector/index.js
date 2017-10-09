@@ -39,7 +39,7 @@ export default class DateSelector extends Component {
       focusedInput: START_DATE,
     }
 
-    this.instanceId = `dateselector-${shortid()}`
+    this.instanceId = `dateselector-${shortid.generate()}`
 
     this.handleFocusChange = this.handleFocusChange.bind(this)
     this.handleDatesChange = this.handleDatesChange.bind(this)
