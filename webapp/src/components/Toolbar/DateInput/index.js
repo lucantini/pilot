@@ -80,14 +80,14 @@ class DateInput extends React.Component {
 
           <div>
             <MaskedInput
-              mask="11/11/1111"
+              mask="11-11-1111"
               name="startDate"
               onChange={value => this.handleDateChange('startDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
             />
 
             <MaskedInput
-              mask="11/11/1111"
+              mask="11-11-1111"
               name="endDate"
               onChange={value => this.handleDateChange('endDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
