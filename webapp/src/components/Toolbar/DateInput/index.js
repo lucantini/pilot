@@ -109,11 +109,11 @@ DateInput.propTypes = {
     key: string,
     title: string,
     date: func,
-    items: arrayOf({
+    items: arrayOf(shape({
       title: string,
       date: func,
       key: string,
-    }),
+    })),
   })).isRequired,
 }
 
