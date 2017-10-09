@@ -10,6 +10,7 @@ import {
   arrayOf,
   string,
   bool,
+  instanceOf,
 } from 'prop-types'
 
 import moment from 'moment'
@@ -80,6 +81,7 @@ class DateInput extends React.Component {
 
     const {
       active,
+      initialDate,
     } = this.props
 
     return (
@@ -87,7 +89,6 @@ class DateInput extends React.Component {
         <label
           className={style.label}
           htmlFor={this.name}
-
         >
           <span className={style.icon}>
             <IconCalendar />
@@ -102,6 +103,7 @@ class DateInput extends React.Component {
               name="startDate"
               onChange={value => this.handleDateChange('startDate', value)}
               placeholder="Inicio"
+              value={initialDate.start && initialDate.start.format('DD-MM-YYYY')}
             />
 
             <MaskedInput
@@ -112,6 +114,7 @@ class DateInput extends React.Component {
               name="endDate"
               onChange={value => this.handleDateChange('endDate', value)}
               placeholder="Fim"
+              value={initialDate.end && initialDate.end.format('DD-MM-YYYY')}
             />
           </div>
         </label>
@@ -134,6 +137,10 @@ class DateInput extends React.Component {
 DateInput.propTypes = {
   onChange: func.isRequired,
   active: bool.isRequired,
+  initialDate: shape({
+    start: instanceOf(moment),
+    end: instanceOf(moment),
+  }),
   presets: arrayOf(shape({
     key: string,
     title: string,
@@ -144,6 +151,13 @@ DateInput.propTypes = {
       key: string,
     })),
   })).isRequired,
+}
+
+DateInput.defaultProps = {
+  initialDate: {
+    start: null,
+    end: null,
+  },
 }
 
 export default clickOutside(DateInput)

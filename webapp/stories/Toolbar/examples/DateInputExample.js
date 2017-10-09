@@ -1,5 +1,7 @@
 import React from 'react'
 
+import moment from 'moment'
+
 import DateInput from '../../../src/components/Toolbar/DateInput'
 import Toolbar from '../../../src/components/Toolbar'
 
@@ -24,6 +26,10 @@ class DateInputExample extends React.Component {
     return (
       <Toolbar>
         <DateInput
+          initialDate={{
+            start: moment(),
+            end: moment().subtract(10, 'days'),
+          }}
           presets={presets}
           onChange={this.handleDatesChange}
           active={this.state.date}
