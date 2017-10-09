@@ -138,7 +138,7 @@ export default class DateSelector extends Component {
     const id = `${this.instanceId}-preset-${key}`
 
     return (
-      <li>
+      <li key={`${key}${title}`}>
         <input
           type="radio"
           name={group}
@@ -157,7 +157,7 @@ export default class DateSelector extends Component {
     return presets.map(({ date, items, key, title }) => {
       if (items) {
         return (
-          <ol>
+          <ol key={`${key}${title}`}>
             <h2>{title}</h2>
             {this.renderPresets(items)}
           </ol>
@@ -195,8 +195,6 @@ export default class DateSelector extends Component {
               onFocusChange={this.handleFocusChange}
               navPrev={<IconArrowLeft />}
               navNext={<IconArrowRight />}
-              customArrowIcon={<i className={style.calendarCustomArrow} />}
-              horizontalMargin={24 / 2}
               startDate={this.state.dates.start}
               endDate={this.state.dates.end}
               onDatesChange={this.handleDatesChange}
@@ -228,7 +226,7 @@ export default class DateSelector extends Component {
         </caption>
         <Button
           variant="clean"
-          color="gray"
+          color="silver"
           size="small"
           onClick={this.handleCancel}
         >
