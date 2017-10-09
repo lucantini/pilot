@@ -16,6 +16,7 @@ import moment from 'moment'
 import IconCalendar from 'react-icons/lib/fa/calendar'
 
 import MaskedInput from 'react-maskedinput'
+import clickOutside from 'react-click-outside'
 
 import DateSelector from '../../DateSelector'
 
@@ -37,6 +38,12 @@ class DateInput extends React.Component {
     this.name = shortid.generate()
 
     this.handleDateChange = this.handleDateChange.bind(this)
+  }
+
+  handleClickOutside () {
+    this.setState({
+      showDateSelector: false,
+    })
   }
 
   handleDateChange (period, value) {
@@ -117,4 +124,4 @@ DateInput.propTypes = {
   })).isRequired,
 }
 
-export default DateInput
+export default clickOutside(DateInput)
