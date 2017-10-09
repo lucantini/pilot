@@ -134,7 +134,7 @@ export default class DateSelector extends Component {
   }
 
   handleConfirm () {
-    this.props.onDatesChange(this.state.dates)
+    this.props.onSubmit(this.state.dates)
   }
 
   handleCancel () {
@@ -298,7 +298,7 @@ export default class DateSelector extends Component {
 }
 
 DateSelector.propTypes = {
-  onDatesChange: func,
+  onSubmit: func,
   onCancel: func,
   onFocusChange: func,
   focusedInput: string,
@@ -314,7 +314,7 @@ DateSelector.propTypes = {
 }
 
 DateSelector.defaultProps = {
-  onDatesChange: () => undefined,
+  onSubmit: () => undefined,
   onCancel: () => undefined,
   onFocusChange: () => undefined,
   focusedInput: START_DATE,

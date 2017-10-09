@@ -42,7 +42,7 @@ storiesOf('DateSelector', module)
     <div className={style.container}>
       <DateSelector
         presets={presets}
-        onDatesChange={action('onDatesChange')}
+        onSubmit={action('onSubmit')}
         onCancel={action('onCancel')}
       />
     </div>
