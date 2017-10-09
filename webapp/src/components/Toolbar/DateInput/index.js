@@ -78,12 +78,13 @@ class DateInput extends React.Component {
             <IconCalendar />
           </span>
 
-          <div>
+          <div className={style.flex}>
             <MaskedInput
               mask="11-11-1111"
               name="startDate"
               onChange={value => this.handleDateChange('startDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
+              className={style.input}
             />
 
             <MaskedInput
@@ -91,6 +92,7 @@ class DateInput extends React.Component {
               name="endDate"
               onChange={value => this.handleDateChange('endDate', value)}
               onFocus={() => this.setState({ showDateSelector: true })}
+              className={style.input}
             />
           </div>
         </label>
