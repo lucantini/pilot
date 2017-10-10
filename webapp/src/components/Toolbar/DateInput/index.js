@@ -35,6 +35,13 @@ const getInputClasses = (focused, active) => classNames(
   }
 )
 
+const shouldShowEndInput = preset => !['today', 'single'].includes(preset)
+
+const getEndInputClasses = preset =>
+  classNames(style.inputWrap, {
+    [style.separator]: shouldShowEndInput(preset),
+  })
+
 const DATE_MASK = 'DD-MM-YYYY'
 
 class DateInput extends React.Component {
@@ -49,7 +56,7 @@ class DateInput extends React.Component {
       dates: { start: initialDates.start, end: initialDates.end },
       focusedInput: 'startDate',
       showDateSelector: false,
-      preset: 'today',
+      preset: (initialDates.start && initialDates.end) ? 'range' : 'today',
     }
 
     this.name = shortid.generate()
@@ -117,30 +124,34 @@ class DateInput extends React.Component {
           </span>
 
           <div className={style.flex}>
-            <MaskedInput
-              mask="11-11-1111"
-              onFocus={() =>
-                this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-              className={style.input}
-              placeholderChar=" "
-              name="startDate"
-              onChange={value => this.handleInputChange('start', value)}
-              placeholder="Inicio"
-              value={dates.start && dates.start.format(DATE_MASK)}
-            />
-
-            {!['today', 'single'].includes(preset) ?
+            <div className={style.inputWrap}>
               <MaskedInput
                 mask="11-11-1111"
                 onFocus={() =>
-                  this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
+                  this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
                 className={style.input}
                 placeholderChar=" "
-                name="endDate"
-                onChange={value => this.handleInputChange('end', value)}
-                placeholder="Fim"
-                value={dates.end && dates.end.format(DATE_MASK)}
+                name="startDate"
+                onChange={value => this.handleInputChange('start', value)}
+                placeholder="Inicio"
+                value={dates.start && dates.start.format(DATE_MASK)}
               />
+            </div>
+
+            {!['today', 'single'].includes(preset) ?
+              <div className={getEndInputClasses(preset)}>
+                <MaskedInput
+                  mask="11-11-1111"
+                  onFocus={() =>
+                    this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
+                  className={style.input}
+                  placeholderChar=" "
+                  name="endDate"
+                  onChange={value => this.handleInputChange('end', value)}
+                  placeholder="Fim"
+                  value={dates.end && dates.end.format(DATE_MASK)}
+                />
+              </div>
               : null
             }
           </div>

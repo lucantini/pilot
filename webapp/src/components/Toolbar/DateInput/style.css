@@ -39,3 +39,19 @@
   display: flex;
 }
 
+.inputWrap {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+}
+
+.separator:before {
+  content: "";
+  position: absolute;
+  height: 80%;
+  width: 1px;
+  background-color: #3ed2a4;
+  left: -10px;
+}
+

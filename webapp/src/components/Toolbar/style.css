@@ -1,5 +1,3 @@
-
-
 @import "./properties.css";
 
 .root,
@@ -41,15 +39,16 @@
 }
 
 .toolbar > div:nth-child(1) {
-  width: calc(100% / 12 * 3);
+  min-width: calc(100% / 12 * 3);
 }
 
 .toolbar > div:nth-child(2) {
-  width: calc(100% / 12 * 9);
+  min-width: calc(100% / 12 * 9);
 }
 
 .toolbar > div {
   margin-right: 6px;
+  width: auto;
 }
 
 .toolbar > div:last-child {
