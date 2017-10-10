@@ -35,16 +35,16 @@ import './react-dates.scss'
 const START_DATE = 'startDate'
 
 const calculatePreset = (dates, presetKey) => {
-  if (presetKey || !dates) {
-    return presetKey
-  }
-
   if (is(Number, dates)) {
     if (dates === 0) {
       return 'single'
     }
 
     return 'range'
+  }
+
+  if (presetKey || !dates) {
+    return presetKey || 'range'
   }
 
   if (moment.isMoment(dates)) {
