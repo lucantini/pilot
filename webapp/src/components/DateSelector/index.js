@@ -276,14 +276,14 @@ export default class DateSelector extends Component {
           variant="clean"
           color="silver"
           size="small"
-          onClick={this.handleCancel}
+          onClick={() => this.handleCancel()}
         >
           Cancelar
         </Button>
         <Button
           variant="clean"
           size="small"
-          onClick={this.handleConfirm}
+          onClick={() => this.handleConfirm()}
         >
           Confirmar Período
         </Button>
