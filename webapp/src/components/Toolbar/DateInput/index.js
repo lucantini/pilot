@@ -133,57 +133,54 @@ class DateInput extends React.Component {
     return (
       <div className={getInputClasses(showDateSelector, active)}>
         <label
-          className={style.flex}
+          className={classNames(style.flex, style.label)}
           htmlFor={this.name}
         >
           <span className={style.icon}>
             <IconCalendar />
           </span>
 
-          <div className={style.flex}>
-            <div className={style.inputWrap}>
-              {
-                dates.start ?
-                  <MaskedInput
-                    mask="11-11-1111"
-                    onFocus={() =>
-                      this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-                    onBlur={() => console.log('Shouldnt it close the Picker?')}
-                    className={style.input}
-                    placeholderChar=" "
-                    name="startDate"
-                    onChange={value => this.handleInputChange('start', value)}
-                    placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
-                    value={dates.start && dates.start.format(DATE_MASK)}
-                  />
-                  : <button
-                    onClick={() =>
-                      this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-                    className={style.initialPlaceholder}
-                  >
-                    Selecione um dia ou periodo
-                  </button>
-              }
-            </div>
+          {dates.start ?
+            <MaskedInput
+              mask="11-11-1111"
+              size="8"
+              onFocus={() =>
+                this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+              onBlur={() => console.log('Shouldnt it close the Picker?')}
+              className={style.input}
+              placeholderChar=" "
+              name="startDate"
+              onChange={value => this.handleInputChange('start', value)}
+              placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
+              value={dates.start && dates.start.format(DATE_MASK)}
+            />
+            : <button
+              onClick={() =>
+                this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+              className={style.initialPlaceholder}
+            >
+              Selecione um dia ou periodo
+            </button>
+          }
 
-            {isEndInputShown(dates) ?
-              <div className={getEndInputClasses(dates)}>
-                <MaskedInput
-                  mask="11-11-1111"
-                  onFocus={() =>
-                    this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
-                  onBlur={() => console.log('Shouldnt it close the Picker?')}
-                  className={style.input}
-                  placeholderChar=" "
-                  name="endDate"
-                  onChange={value => this.handleInputChange('end', value)}
-                  placeholder="Fim"
-                  value={dates.end && dates.end.format(DATE_MASK)}
-                />
-              </div>
-              : null
-            }
-          </div>
+          {isEndInputShown(dates) ?
+            <div className={getEndInputClasses(dates)}>
+              <MaskedInput
+                mask="11-11-1111"
+                size="8"
+                onFocus={() =>
+                  this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
+                onBlur={() => console.log('Shouldnt it close the Picker?')}
+                className={style.input}
+                placeholderChar=" "
+                name="endDate"
+                onChange={value => this.handleInputChange('end', value)}
+                placeholder="Fim"
+                value={dates.end && dates.end.format(DATE_MASK)}
+              />
+            </div>
+            : null
+          }
         </label>
 
         {showDateSelector ?

@@ -13,8 +13,6 @@
   color: #999999;
   display: flex;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .input {
@@ -34,6 +32,10 @@
 .flex {
   display: flex;
   width: 100%;
+}
+
+.label > * {
+  margin-left: 10px;
 }
 
 .inputWrap {
