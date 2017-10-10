@@ -46,7 +46,7 @@ import {
 
 import CheckboxGroup from '../../components/CheckboxGroup'
 
-import presets from '../../shared/date-presets'
+import presets from '../../shared/datePresets'
 
 
 class Filters extends Component {
