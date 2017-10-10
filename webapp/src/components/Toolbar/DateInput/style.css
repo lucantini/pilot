@@ -31,8 +31,8 @@
 
 .absolutePosition {
   position: absolute;
-  top: 100%;
-  transform: translateY(3px);
+  top: calc(100% + 3px);
+  left: 0;
 }
 
 .flex {
