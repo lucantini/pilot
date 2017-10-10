@@ -116,7 +116,7 @@ class DateInput extends React.Component {
     return (
       <div className={getInputClasses(showDateSelector, active)}>
         <label
-          className={style.label}
+          className={style.flex}
           htmlFor={this.name}
         >
           <span className={style.icon}>
