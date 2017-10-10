@@ -1,10 +1,5 @@
 export default [
   {
-    key: 'today',
-    title: 'Hoje',
-    date: () => 1,
-  },
-  {
     title: 'Ultimos:',
     items: [
       {
