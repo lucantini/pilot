@@ -5,7 +5,9 @@ import moment from 'moment'
 import DateInput from '../../../src/components/Toolbar/DateInput'
 import Toolbar from '../../../src/components/Toolbar'
 
-import presets from '../../../src/shared/date-presets'
+import presets from '../../../src/shared/datePresets'
+
+import rootStyle from '../style.css'
 
 class DateInputExample extends React.Component {
   constructor (props) {
@@ -30,16 +32,38 @@ class DateInputExample extends React.Component {
 
   render () {
     return (
-      <Toolbar>
-        <DateInput
-          presets={presets}
-          initialDates={{ start: moment(), end: moment() }}
-          dates={this.state.dates}
-          onChange={this.handleDatesChange}
-          onFocusChange={this.onFocusChange}
-          active={this.state.date}
-        />
-      </Toolbar>
+      <main className={rootStyle.main}>
+        <h1>DateInput usage</h1>
+
+        <section>
+          <h2>with minimal setup</h2>
+
+          <Toolbar>
+            <DateInput
+              presets={presets}
+              dates={this.state.dates}
+              onChange={this.handleDatesChange}
+              onFocusChange={this.onFocusChange}
+              active={this.state.date}
+            />
+          </Toolbar>
+        </section>
+
+        <section>
+          <h2>with initialDates</h2>
+
+          <Toolbar>
+            <DateInput
+              presets={presets}
+              initialDates={{ start: moment(), end: moment() }}
+              dates={this.state.dates}
+              onChange={this.handleDatesChange}
+              onFocusChange={this.onFocusChange}
+              active={this.state.date}
+            />
+          </Toolbar>
+        </section>
+      </main>
     )
   }
 }
