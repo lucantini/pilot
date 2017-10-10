@@ -68,6 +68,7 @@ class Filters extends Component {
     this.handleFiltersSubmit = this.handleFiltersSubmit.bind(this)
 
     this.createTags = this.createTags.bind(this)
+    this.cardTitle = this.cardTitle.bind(this)
   }
 
   componentDidMount () {
@@ -169,10 +170,29 @@ class Filters extends Component {
     ), selectedFilters)
   }
 
+  cardTitle () {
+    const activeFiltersKeys = Object.keys(this.state.activeFilters)
+
+    const { showContent } = this.state
+
+    if (!showContent) {
+      return 'Menos filtros'
+    }
+
+    if (showContent && activeFiltersKeys.length === 0) {
+      return 'Mais filtros'
+    }
+
+    return 'Editar filtros'
+  }
+
   render () {
     const {
       showContent,
+      activeFilters,
     } = this.state
+
+    const activeFiltersKeys = Object.keys(activeFilters)
 
     return (
       <Card className={style.allowContentOverflow}>
@@ -208,7 +228,7 @@ class Filters extends Component {
                   variant="clean"
                   onClick={this.handleVisibility}
                 >
-                  Meh {showContent ? <IconArrowDown /> : <IconArrowUp />}
+                  {this.cardTitle()} {showContent ? <IconArrowDown /> : <IconArrowUp />}
                 </Button>
 
                 <Row toggleChildren={showContent} className={style.paddingTop}>
@@ -230,12 +250,24 @@ class Filters extends Component {
                 </Row>
               </div>
 
-              {this.state.showContent && this.createTags() &&
-                <Row className={style.paddingTop}>
-                  <Col className={style.spaceButtons}>
-                    {this.createTags()}
-                  </Col>
-                </Row>
+              {this.state.showContent && activeFiltersKeys.length > 0 &&
+                <div>
+                  <Row>
+                    <Col>
+                      <p
+                        className={style.selectedOptions}
+                      >
+                        Opções selecionadas
+                      </p>
+                    </Col>
+                  </Row>
+
+                  <Row className={style.marginTop}>
+                    <Col className={style.spaceButtons}>
+                      {this.createTags()}
+                    </Col>
+                  </Row>
+                </div>
               }
             </Grid>
           </CardContent>
