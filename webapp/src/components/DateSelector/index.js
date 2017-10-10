@@ -67,15 +67,15 @@ const calculatePreset = (dates, presetKey) => {
 }
 
 const normalizeDates = (dates) => {
-  if (!dates) {
-    return { start: null, end: null }
-  }
-
   if (is(Number, dates)) {
     return {
       start: moment().subtract(dates, 'day').startOf('day'),
       end: moment().endOf('day'),
     }
+  }
+
+  if (!dates) {
+    return { start: null, end: null }
   }
 
   if (moment.isMoment(dates)) {
