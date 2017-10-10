@@ -75,8 +75,6 @@ class DateInput extends React.Component {
     const inputLens = lensPath(['dates', input])
     const state = set(inputLens, date, this.state)
 
-    console.log({ state })
-
     this.setState(state)
   }
 
