@@ -35,11 +35,27 @@ const getInputClasses = (focused, active) => classNames(
   }
 )
 
-const shouldShowEndInput = preset => !['today', 'single'].includes(preset)
+const isEndInputShown = ({ start, end }) => {
+  if (start === end) {
+    return false
+  }
 
-const getEndInputClasses = preset =>
+  if (start.isSame(end, 'day')) {
+    return false
+  }
+
+  const now = moment()
+
+  if (now.isSame(start, 'day') && now.isSame(end, 'day')) {
+    return false
+  }
+
+  return true
+}
+
+const getEndInputClasses = dates =>
   classNames(style.inputWrap, {
-    [toolItemStyle.separator]: shouldShowEndInput(preset),
+    [toolItemStyle.separator]: isEndInputShown(dates),
   })
 
 const DATE_MASK = 'DD-MM-YYYY'
@@ -56,7 +72,6 @@ class DateInput extends React.Component {
       dates: { start: initialDates.start, end: initialDates.end },
       focusedInput: 'startDate',
       showDateSelector: false,
-      preset: (initialDates.start && initialDates.end) ? 'range' : 'today',
     }
 
     this.name = shortid.generate()
@@ -87,10 +102,9 @@ class DateInput extends React.Component {
     this.setState(state)
   }
 
-  handleDatesChange ({ start, end, preset }) {
+  handleDatesChange ({ start, end }) {
     this.setState({
       dates: { start, end },
-      preset,
     })
   }
 
@@ -110,7 +124,6 @@ class DateInput extends React.Component {
     const {
       dates,
       showDateSelector,
-      preset,
     } = this.state
 
     const {
@@ -143,8 +156,8 @@ class DateInput extends React.Component {
               />
             </div>
 
-            {!['today', 'single'].includes(preset) ?
-              <div className={getEndInputClasses(preset)}>
+            {isEndInputShown(dates) ?
+              <div className={getEndInputClasses(dates)}>
                 <MaskedInput
                   mask="11-11-1111"
                   onFocus={() =>

@@ -134,10 +134,7 @@ export default class DateSelector extends Component {
     const preset = calculatePreset(normalizedDates)
 
     this.setState({ preset })
-    this.props.onChange({
-      ...normalizedDates,
-      preset,
-    })
+    this.props.onChange(normalizedDates)
   }
 
   handlePresetChange (dates, key) {
@@ -148,10 +145,7 @@ export default class DateSelector extends Component {
       dates: normalizedDates,
     })
 
-    this.props.onChange({
-      ...normalizedDates,
-      preset: key,
-    })
+    this.props.onChange(normalizedDates)
   }
 
   handleCancel () {
