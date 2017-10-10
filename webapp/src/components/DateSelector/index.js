@@ -35,7 +35,7 @@ import './react-dates.scss'
 const START_DATE = 'startDate'
 
 const calculatePreset = (dates, presetKey) => {
-  if (presetKey) {
+  if (presetKey || !dates) {
     return presetKey
   }
 
@@ -67,6 +67,10 @@ const calculatePreset = (dates, presetKey) => {
 }
 
 const normalizeDates = (dates) => {
+  if (!dates) {
+    return { start: null, end: null }
+  }
+
   if (is(Number, dates)) {
     return {
       start: moment().subtract(dates, 'day').startOf('day'),
@@ -201,9 +205,13 @@ export default class DateSelector extends Component {
     } = this.state
 
     const {
-      dates: { start, end },
       focusedInput,
     } = this.props
+
+    const {
+      start,
+      end,
+    } = this.props.dates || {}
 
     return (
       <div className="ReactDates-overrides">
@@ -238,7 +246,7 @@ export default class DateSelector extends Component {
   }
 
   renderActions () {
-    const { start, end } = this.props.dates
+    const { start, end } = this.props.dates || {}
     const { preset } = this.state
 
     let daysCount = 0
