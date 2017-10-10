@@ -96,7 +96,6 @@ class DateInput extends React.Component {
 
     const {
       active,
-      initialDates,
     } = this.props
 
     return (
@@ -119,7 +118,7 @@ class DateInput extends React.Component {
               name="startDate"
               onChange={value => this.handleInputChange('start', value)}
               placeholder="Inicio"
-              value={(dates.start || initialDates.start).format(DATE_MASK)}
+              value={dates.start && dates.start.format(DATE_MASK)}
             />
 
             <MaskedInput
@@ -131,7 +130,7 @@ class DateInput extends React.Component {
               name="endDate"
               onChange={value => this.handleInputChange('end', value)}
               placeholder="Fim"
-              value={(dates.end || initialDates.end).format(DATE_MASK)}
+              value={dates.end && dates.end.format(DATE_MASK)}
             />
           </div>
         </label>
