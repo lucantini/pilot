@@ -53,8 +53,9 @@ const calculatePreset = (dates, presetKey) => {
 
   if (dates.start && dates.end) {
     const { start, end } = dates
+    const now = moment()
 
-    if (moment().isSame(start, 'day')) {
+    if (now.isSame(start, 'day') && now.isSame(end, 'day')) {
       return 'today'
     }
 
