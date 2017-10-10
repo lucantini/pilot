@@ -44,7 +44,7 @@ class DateInputExample extends React.Component {
               dates={this.state.dates}
               onChange={this.handleDatesChange}
               onFocusChange={this.onFocusChange}
-              active={this.state.date}
+              active={!!this.state.dates}
             />
           </Toolbar>
         </section>
@@ -59,7 +59,7 @@ class DateInputExample extends React.Component {
               dates={this.state.dates}
               onChange={this.handleDatesChange}
               onFocusChange={this.onFocusChange}
-              active={this.state.date}
+              active={!!this.state.dates}
             />
           </Toolbar>
         </section>

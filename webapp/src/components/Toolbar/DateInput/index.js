@@ -39,7 +39,7 @@ const shouldShowEndInput = preset => !['today', 'single'].includes(preset)
 
 const getEndInputClasses = preset =>
   classNames(style.inputWrap, {
-    [style.separator]: shouldShowEndInput(preset),
+    [toolItemStyle.separator]: shouldShowEndInput(preset),
   })
 
 const DATE_MASK = 'DD-MM-YYYY'
