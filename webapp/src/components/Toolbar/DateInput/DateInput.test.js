@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 
 import DateInput from './index'
 
-import presets from '../../../shared/date-presets'
+import presets from '../../../shared/datePresets'
 
 describe('DatePicker', () => {
   it('should mount', () => {
