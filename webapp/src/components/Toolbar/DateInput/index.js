@@ -94,8 +94,12 @@ class DateInput extends React.Component {
     })
   }
 
-  handleConfirm (dd) {
-    console.log(dd, this)
+  handleConfirm (dates) {
+    this.setState({
+      showDateSelector: false,
+    })
+
+    this.props.onChange(dates)
   }
 
   handleFocusChange (focusedInput) {
@@ -178,6 +182,7 @@ class DateInput extends React.Component {
 
 DateInput.propTypes = {
   active: bool.isRequired,
+  onChange: func.isRequired,
   initialDates: shape({
     start: instanceOf(moment),
     end: instanceOf(moment),
