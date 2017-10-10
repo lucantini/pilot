@@ -133,6 +133,7 @@ class DateInput extends React.Component {
                 mask="11-11-1111"
                 onFocus={() =>
                   this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+                onBlur={() => console.log('Shouldnt it close the Picker?')}
                 className={style.input}
                 placeholderChar=" "
                 name="startDate"
@@ -148,6 +149,7 @@ class DateInput extends React.Component {
                   mask="11-11-1111"
                   onFocus={() =>
                     this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
+                  onBlur={() => console.log('Shouldnt it close the Picker?')}
                   className={style.input}
                   placeholderChar=" "
                   name="endDate"
