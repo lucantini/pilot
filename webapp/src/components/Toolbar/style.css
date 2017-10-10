@@ -20,7 +20,7 @@
   font-size: var(--toolitem-font-size: 14px);
   transition: border-color 100ms ease-in-out;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .active,
