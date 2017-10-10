@@ -142,18 +142,28 @@ class DateInput extends React.Component {
 
           <div className={style.flex}>
             <div className={style.inputWrap}>
-              <MaskedInput
-                mask="11-11-1111"
-                onFocus={() =>
-                  this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-                onBlur={() => console.log('Shouldnt it close the Picker?')}
-                className={style.input}
-                placeholderChar=" "
-                name="startDate"
-                onChange={value => this.handleInputChange('start', value)}
-                placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
-                value={dates.start && dates.start.format(DATE_MASK)}
-              />
+              {
+                dates.start ?
+                  <MaskedInput
+                    mask="11-11-1111"
+                    onFocus={() =>
+                      this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+                    onBlur={() => console.log('Shouldnt it close the Picker?')}
+                    className={style.input}
+                    placeholderChar=" "
+                    name="startDate"
+                    onChange={value => this.handleInputChange('start', value)}
+                    placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
+                    value={dates.start && dates.start.format(DATE_MASK)}
+                  />
+                  : <button
+                    onClick={() =>
+                      this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+                    className={style.initialPlaceholder}
+                  >
+                    Selecione um dia ou periodo
+                  </button>
+              }
             </div>
 
             {isEndInputShown(dates) ?
