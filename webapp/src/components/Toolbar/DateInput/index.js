@@ -49,6 +49,7 @@ class DateInput extends React.Component {
       dates: { start: initialDates.start, end: initialDates.end },
       focusedInput: 'startDate',
       showDateSelector: false,
+      preset: 'today',
     }
 
     this.name = shortid.generate()
@@ -56,6 +57,7 @@ class DateInput extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleDatesChange = this.handleDatesChange.bind(this)
     this.handleFocusChange = this.handleFocusChange.bind(this)
+    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
   handleClickOutside () {
@@ -78,8 +80,15 @@ class DateInput extends React.Component {
     this.setState(state)
   }
 
-  handleDatesChange (dates) {
-    this.setState({ dates })
+  handleDatesChange ({ start, end, preset }) {
+    this.setState({
+      dates: { start, end },
+      preset,
+    })
+  }
+
+  handleConfirm (dd) {
+    console.log(dd, this)
   }
 
   handleFocusChange (focusedInput) {
@@ -90,6 +99,7 @@ class DateInput extends React.Component {
     const {
       dates,
       showDateSelector,
+      preset,
     } = this.state
 
     const {
@@ -119,17 +129,20 @@ class DateInput extends React.Component {
               value={dates.start && dates.start.format(DATE_MASK)}
             />
 
-            <MaskedInput
-              mask="11-11-1111"
-              onFocus={() =>
-                this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
-              className={style.input}
-              placeholderChar=" "
-              name="endDate"
-              onChange={value => this.handleInputChange('end', value)}
-              placeholder="Fim"
-              value={dates.end && dates.end.format(DATE_MASK)}
-            />
+            {!['today', 'single'].includes(preset) ?
+              <MaskedInput
+                mask="11-11-1111"
+                onFocus={() =>
+                  this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
+                className={style.input}
+                placeholderChar=" "
+                name="endDate"
+                onChange={value => this.handleInputChange('end', value)}
+                placeholder="Fim"
+                value={dates.end && dates.end.format(DATE_MASK)}
+              />
+              : null
+            }
           </div>
         </label>
 
@@ -139,6 +152,7 @@ class DateInput extends React.Component {
               dates={this.state.dates}
               onChange={this.handleDatesChange}
               onCancel={this.handleCancel}
+              onConfirm={this.handleConfirm}
               onFocusChange={this.handleFocusChange}
               focusedInput={this.state.focusedInput}
               presets={this.props.presets}

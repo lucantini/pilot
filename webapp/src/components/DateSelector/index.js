@@ -126,6 +126,7 @@ export default class DateSelector extends Component {
   }
 
   handleFocusChange (focusedInput) {
+    console.log('handleFocusChange', focusedInput)
     this.props.onFocusChange(focusedInput || START_DATE)
   }
 
@@ -133,8 +134,12 @@ export default class DateSelector extends Component {
     const normalizedDates = normalizeDates(dates)
     const preset = calculatePreset(normalizedDates)
 
+    console.log('handleDatesChange')
     this.setState({ preset })
-    this.props.onChange(normalizedDates)
+    this.props.onChange({
+      ...normalizedDates,
+      preset,
+    })
   }
 
   handlePresetChange (dates, key) {
@@ -145,7 +150,10 @@ export default class DateSelector extends Component {
       dates: normalizedDates,
     })
 
-    this.props.onChange(normalizedDates)
+    this.props.onChange({
+      ...normalizedDates,
+      preset: key,
+    })
   }
 
   handleCancel () {
