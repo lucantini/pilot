@@ -12,26 +12,31 @@ class DateInputExample extends React.Component {
     super(props)
 
     this.state = {
-      date: null,
+      dates: null,
+      focusedInput: 'startDate',
     }
 
     this.handleDatesChange = this.handleDatesChange.bind(this)
+    this.handleFocusChange = this.handleFocusChange.bind(this)
   }
 
-  handleDatesChange (date) {
-    this.setState({ date })
+  handleFocusChange (focusedInput) {
+    this.setState({ focusedInput })
+  }
+
+  handleDatesChange (dates) {
+    this.setState({ dates })
   }
 
   render () {
     return (
       <Toolbar>
         <DateInput
-          initialDate={{
-            start: moment(),
-            end: moment().subtract(10, 'days'),
-          }}
           presets={presets}
+          initialDates={{ start: moment(), end: moment() }}
+          dates={this.state.dates}
           onChange={this.handleDatesChange}
+          onFocusChange={this.onFocusChange}
           active={this.state.date}
         />
       </Toolbar>

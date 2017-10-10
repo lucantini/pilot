@@ -1,7 +1,8 @@
 import React from 'react'
 import shortid from 'shortid'
 import {
-  is,
+  lensPath,
+  set,
 } from 'ramda'
 
 import {
@@ -34,21 +35,27 @@ const getInputClasses = (focused, active) => classNames(
   }
 )
 
+const DATE_MASK = 'DD-MM-YYYY'
+
 class DateInput extends React.Component {
   constructor (props) {
     super(props)
 
+    const {
+      initialDates,
+    } = props
+
     this.state = {
-      value: '',
-      startDate: null,
-      endDate: null,
-      focusedInput: null,
+      dates: { start: initialDates.start, end: initialDates.end },
+      focusedInput: 'startDate',
       showDateSelector: false,
     }
 
     this.name = shortid.generate()
 
-    this.handleDateChange = this.handleDateChange.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleDatesChange = this.handleDatesChange.bind(this)
+    this.handleFocusChange = this.handleFocusChange.bind(this)
   }
 
   handleClickOutside () {
@@ -57,31 +64,39 @@ class DateInput extends React.Component {
     })
   }
 
-  handleDateChange (period, value) {
-    const response = {
-      value,
+  handleInputChange (input, event) {
+    const { value } = event.target
+    const date = moment(value, DATE_MASK)
+
+    if (!date.isValid()) {
+      return
     }
 
-    if (is(Number, value)) {
-      response.start = moment().add(-value, 'day').startOf('day')
-      response.end = moment().endOf('day')
-    }
+    const inputLens = lensPath(['dates', input])
+    const state = set(inputLens, date, this.state)
 
-    this.setState({
-      value,
-    })
+    console.log({ state })
 
-    this.props.onChange(response)
+    this.setState(state)
+  }
+
+  handleDatesChange (dates) {
+    this.setState({ dates })
+  }
+
+  handleFocusChange (focusedInput) {
+    this.setState({ focusedInput })
   }
 
   render () {
     const {
+      dates,
       showDateSelector,
     } = this.state
 
     const {
       active,
-      initialDate,
+      initialDates,
     } = this.props
 
     return (
@@ -97,24 +112,26 @@ class DateInput extends React.Component {
           <div className={style.flex}>
             <MaskedInput
               mask="11-11-1111"
-              onFocus={() => this.setState({ showDateSelector: true })}
+              onFocus={() =>
+                this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
               className={style.input}
               placeholderChar=" "
               name="startDate"
-              onChange={value => this.handleDateChange('startDate', value)}
+              onChange={value => this.handleInputChange('start', value)}
               placeholder="Inicio"
-              value={initialDate.start && initialDate.start.format('DD-MM-YYYY')}
+              value={(dates.start || initialDates.start).format(DATE_MASK)}
             />
 
             <MaskedInput
               mask="11-11-1111"
-              onFocus={() => this.setState({ showDateSelector: true })}
+              onFocus={() =>
+                this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
               className={style.input}
               placeholderChar=" "
               name="endDate"
-              onChange={value => this.handleDateChange('endDate', value)}
+              onChange={value => this.handleInputChange('end', value)}
               placeholder="Fim"
-              value={initialDate.end && initialDate.end.format('DD-MM-YYYY')}
+              value={(dates.end || initialDates.end).format(DATE_MASK)}
             />
           </div>
         </label>
@@ -122,8 +139,11 @@ class DateInput extends React.Component {
         {showDateSelector ?
           <div className={style.absolutePosition}>
             <DateSelector
-              onDatesChange={this.handleDatesChange}
+              dates={this.state.dates}
+              onChange={this.handleDatesChange}
               onCancel={this.handleCancel}
+              onFocusChange={this.handleFocusChange}
+              focusedInput={this.state.focusedInput}
               presets={this.props.presets}
             />
           </div>
@@ -135,9 +155,8 @@ class DateInput extends React.Component {
 }
 
 DateInput.propTypes = {
-  onChange: func.isRequired,
   active: bool.isRequired,
-  initialDate: shape({
+  initialDates: shape({
     start: instanceOf(moment),
     end: instanceOf(moment),
   }),
@@ -154,7 +173,7 @@ DateInput.propTypes = {
 }
 
 DateInput.defaultProps = {
-  initialDate: {
+  initialDates: {
     start: null,
     end: null,
   },
