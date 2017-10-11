@@ -18,15 +18,9 @@ class DateInputExample extends React.Component {
         start: null,
         end: null,
       },
-      focusedInput: 'startDate',
     }
 
     this.handleDatesChange = this.handleDatesChange.bind(this)
-    this.handleFocusChange = this.handleFocusChange.bind(this)
-  }
-
-  handleFocusChange (focusedInput) {
-    this.setState({ focusedInput })
   }
 
   handleDatesChange (dates) {
@@ -61,7 +55,6 @@ class DateInputExample extends React.Component {
               initialDates={{ start: moment(), end: moment() }}
               dates={dates}
               onChange={this.handleDatesChange}
-              onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}
             />
           </Toolbar>
@@ -76,7 +69,6 @@ class DateInputExample extends React.Component {
               initialDates={{ start: moment(), end: moment().subtract(7, 'days') }}
               dates={dates}
               onChange={this.handleDatesChange}
-              onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}
             />
           </Toolbar>
@@ -91,7 +83,6 @@ class DateInputExample extends React.Component {
               initialDates={{ start: moment() }}
               dates={dates}
               onChange={this.handleDatesChange}
-              onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}
             />
           </Toolbar>
@@ -106,7 +97,6 @@ class DateInputExample extends React.Component {
               dates={dates}
               initialDates={{ start: null, end: null }}
               onChange={this.handleDatesChange}
-              onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}
             />
           </Toolbar>
