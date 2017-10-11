@@ -45,9 +45,8 @@ class DateInputExample extends React.Component {
           <Toolbar>
             <DateInput
               presets={presets}
-              initialDates={dates}
+              dates={dates}
               onChange={this.handleDatesChange}
-              onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}
             />
           </Toolbar>
@@ -61,6 +60,51 @@ class DateInputExample extends React.Component {
               presets={presets}
               initialDates={{ start: moment(), end: moment() }}
               dates={dates}
+              onChange={this.handleDatesChange}
+              onFocusChange={this.onFocusChange}
+              active={dates.start && dates.end}
+            />
+          </Toolbar>
+        </section>
+
+        <section>
+          <h2>with initialDates period</h2>
+
+          <Toolbar>
+            <DateInput
+              presets={presets}
+              initialDates={{ start: moment(), end: moment().subtract(7, 'days') }}
+              dates={dates}
+              onChange={this.handleDatesChange}
+              onFocusChange={this.onFocusChange}
+              active={dates.start && dates.end}
+            />
+          </Toolbar>
+        </section>
+
+        <section>
+          <h2>with initialDates with null end</h2>
+
+          <Toolbar>
+            <DateInput
+              presets={presets}
+              initialDates={{ start: moment() }}
+              dates={dates}
+              onChange={this.handleDatesChange}
+              onFocusChange={this.onFocusChange}
+              active={dates.start && dates.end}
+            />
+          </Toolbar>
+        </section>
+
+        <section>
+          <h2>with initialDates all null</h2>
+
+          <Toolbar>
+            <DateInput
+              presets={presets}
+              dates={dates}
+              initialDates={{ start: null, end: null }}
               onChange={this.handleDatesChange}
               onFocusChange={this.onFocusChange}
               active={dates.start && dates.end}

@@ -194,7 +194,7 @@ class DateInput extends React.Component {
                 placeholderChar=" "
                 name="startDate"
                 onChange={value => this.handleInputChange('start', value)}
-                placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
+                placeholder="Inicio"
                 value={dates.start}
               />
             ) : (
