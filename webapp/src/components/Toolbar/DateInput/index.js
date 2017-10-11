@@ -131,7 +131,7 @@ class DateInput extends React.Component {
           className={classNames(style.flex, style.label)}
           htmlFor={this.name}
         >
-          <div>
+          <div className={style.icon}>
             <IconCalendar />
           </div>
 
