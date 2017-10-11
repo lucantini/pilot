@@ -1,6 +1,7 @@
 import React from 'react'
 import shortid from 'shortid'
 import {
+  invoker,
   lensPath,
   set,
 } from 'ramda'
@@ -35,7 +36,24 @@ const getInputClasses = (focused, active) => classNames(
   }
 )
 
-const isEndInputShown = ({ start, end }) => {
+const DATE_MASK = 'L'
+
+const formatMoment = invoker(1, 'format')(DATE_MASK)
+
+const textToMoment = ({ start, end }) => ({
+  start: start ? moment(start, DATE_MASK).startOf('day') : null,
+  end: end ? moment(end, DATE_MASK).endOf('day') : null,
+})
+
+const momentToText = ({ start, end }) => ({
+  start: start ? start.format(DATE_MASK) : '',
+  end: end ? end.format(DATE_MASK) : '',
+})
+
+
+const isEndInputShown = (dates) => {
+  const { start, end } = textToMoment(dates)
+
   if (start === end) {
     return false
   }
@@ -53,8 +71,6 @@ const isEndInputShown = ({ start, end }) => {
   return true
 }
 
-const DATE_MASK = 'DD-MM-YYYY'
-
 class DateInput extends React.Component {
   constructor (props) {
     super(props)
@@ -64,9 +80,17 @@ class DateInput extends React.Component {
     } = props
 
     this.state = {
-      dates: { start: initialDates.start, end: initialDates.end },
+      dates: {},
       focusedInput: 'startDate',
       showDateSelector: false,
+    }
+
+    if (initialDates.start) {
+      this.state.dates.start = formatMoment(initialDates.start)
+    }
+
+    if (initialDates.end) {
+      this.state.dates.end = formatMoment(initialDates.end)
     }
 
     this.name = shortid.generate()
@@ -85,21 +109,30 @@ class DateInput extends React.Component {
 
   handleInputChange (input, event) {
     const { value } = event.target
-    const date = moment(value, DATE_MASK)
+    const { start, end } = this.state.dates
 
-    if (!date.isValid()) {
+    if (start === end) {
+      const state = {
+        start: value,
+        end: value,
+      }
+
+      this.setState(state)
+      this.props.onChange(textToMoment(state))
+
       return
     }
 
     const inputLens = lensPath(['dates', input])
-    const state = set(inputLens, date, this.state)
+    const state = set(inputLens, value, this.state)
 
     this.setState(state)
+    this.props.onChange(textToMoment(state))
   }
 
-  handleDatesChange ({ start, end }) {
+  handleDatesChange (dates) {
     this.setState({
-      dates: { start, end },
+      dates: momentToText(dates),
     })
   }
 
@@ -108,7 +141,7 @@ class DateInput extends React.Component {
       showDateSelector: false,
     })
 
-    this.props.onChange(dates)
+    this.props.onChange(textToMoment(dates))
   }
 
   handleFocusChange (focusedInput) {
@@ -125,6 +158,8 @@ class DateInput extends React.Component {
       active,
     } = this.props
 
+    const mask = moment().format(DATE_MASK).replace(/\d/g, '1')
+
     return (
       <div className={getInputClasses(showDateSelector, active)}>
         <label
@@ -138,7 +173,7 @@ class DateInput extends React.Component {
           {dates.start
             ? (
               <MaskedInput
-                mask="11-11-1111"
+                mask={mask}
                 size="7"
                 onFocus={() =>
                   this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
@@ -148,7 +183,7 @@ class DateInput extends React.Component {
                 name="startDate"
                 onChange={value => this.handleInputChange('start', value)}
                 placeholder={!dates.start && !dates.end ? 'Selecione um dia ou periodo' : 'Inicio'}
-                value={dates.start && dates.start.format(DATE_MASK)}
+                value={dates.start}
               />
             ) : (
               <button
@@ -165,7 +200,7 @@ class DateInput extends React.Component {
 
           {isEndInputShown(dates)
             ? <MaskedInput
-              mask="11-11-1111"
+              mask={mask}
               size="7"
               onFocus={() =>
                 this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
@@ -175,7 +210,7 @@ class DateInput extends React.Component {
               name="endDate"
               onChange={value => this.handleInputChange('end', value)}
               placeholder="Fim"
-              value={dates.end && dates.end.format(DATE_MASK)}
+              value={dates.end}
             />
             : null
           }
@@ -184,7 +219,7 @@ class DateInput extends React.Component {
         {showDateSelector ?
           <div className={style.absolutePosition}>
             <DateSelector
-              dates={this.state.dates}
+              dates={textToMoment(this.state.dates)}
               onChange={this.handleDatesChange}
               onCancel={this.handleCancel}
               onConfirm={this.handleConfirm}
