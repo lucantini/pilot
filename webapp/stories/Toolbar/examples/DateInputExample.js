@@ -34,6 +34,7 @@ class DateInputExample extends React.Component {
   }
 
   render () {
+    const { dates } = this.state
     return (
       <main className={rootStyle.main}>
         <h1>DateInput usage</h1>
@@ -44,10 +45,10 @@ class DateInputExample extends React.Component {
           <Toolbar>
             <DateInput
               presets={presets}
-              initialDates={this.state.dates}
+              initialDates={dates}
               onChange={this.handleDatesChange}
               onFocusChange={this.onFocusChange}
-              active={!!this.state.dates}
+              active={dates.start && dates.end}
             />
           </Toolbar>
         </section>
@@ -59,10 +60,10 @@ class DateInputExample extends React.Component {
             <DateInput
               presets={presets}
               initialDates={{ start: moment(), end: moment() }}
-              dates={this.state.dates}
+              dates={dates}
               onChange={this.handleDatesChange}
               onFocusChange={this.onFocusChange}
-              active={!this.state.dates.start}
+              active={dates.start && dates.end}
             />
           </Toolbar>
         </section>
