@@ -95,16 +95,18 @@ class DateInput extends React.Component {
 
     this.name = shortid.generate()
 
+    this.handleClickOutside = this.handleClickOutside.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleDatesChange = this.handleDatesChange.bind(this)
     this.handleFocusChange = this.handleFocusChange.bind(this)
     this.handleConfirm = this.handleConfirm.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
   }
 
   handleClickOutside () {
-    this.setState({
-      showDateSelector: false,
-    })
+    if (this.state.showDateSelector) {
+      this.handleCancel()
+    }
   }
 
   handleInputChange (input, event) {
@@ -137,11 +139,21 @@ class DateInput extends React.Component {
   }
 
   handleConfirm (dates) {
-    this.setState({
-      showDateSelector: false,
-    })
+    this.setState({ showDateSelector: false })
 
     this.props.onChange(textToMoment(dates))
+  }
+
+  handleCancel () {
+    const { initialDates } = this.props
+    const dates = momentToText(initialDates)
+
+    this.setState({
+      showDateSelector: false,
+      dates,
+    })
+
+    this.props.onChange(initialDates)
   }
 
   handleFocusChange (focusedInput) {
@@ -174,7 +186,7 @@ class DateInput extends React.Component {
             ? (
               <MaskedInput
                 mask={mask}
-                size="7"
+                size="8"
                 onFocus={() =>
                   this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
                 onBlur={() => console.log('Shouldnt it close the Picker?')}
@@ -201,7 +213,7 @@ class DateInput extends React.Component {
           {isEndInputShown(dates)
             ? <MaskedInput
               mask={mask}
-              size="7"
+              size="8"
               onFocus={() =>
                 this.setState({ showDateSelector: true, focusedInput: 'endDate' })}
               onBlur={() => console.log('Shouldnt it close the Picker?')}
