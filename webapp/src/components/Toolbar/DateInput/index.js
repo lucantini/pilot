@@ -114,13 +114,13 @@ class DateInput extends React.Component {
     const { start, end } = this.state.dates
 
     if (start === end) {
-      const state = {
+      const dates = {
         start: value,
         end: value,
       }
 
-      this.setState(state)
-      this.props.onChange(textToMoment(state))
+      this.setState({ dates })
+      this.props.onChange(textToMoment(dates))
 
       return
     }
