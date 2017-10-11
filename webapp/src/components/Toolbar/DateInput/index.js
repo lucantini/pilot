@@ -81,6 +81,7 @@ class DateInput extends React.Component {
 
     this.state = {
       dates: {},
+      confirmedDates: {},
       focusedInput: 'startDate',
       showDateSelector: false,
     }
@@ -139,21 +140,33 @@ class DateInput extends React.Component {
   }
 
   handleConfirm (dates) {
-    this.setState({ showDateSelector: false })
+    this.setState({
+      showDateSelector: false,
+      confirmedDates: dates,
+    })
 
-    this.props.onChange(textToMoment(dates))
+    this.props.onChange(dates)
   }
 
   handleCancel () {
     const { initialDates } = this.props
-    const dates = momentToText(initialDates)
+    const { confirmedDates } = this.state
+    let datesText
+
+    if (confirmedDates.start && confirmedDates.end) {
+      datesText = momentToText(confirmedDates)
+    } else {
+      datesText = momentToText(initialDates)
+    }
+
+    const datesMoment = textToMoment(datesText)
 
     this.setState({
       showDateSelector: false,
-      dates,
+      dates: datesText,
     })
 
-    this.props.onChange(initialDates)
+    this.props.onChange(datesMoment)
   }
 
   handleFocusChange (focusedInput) {
