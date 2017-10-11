@@ -69,9 +69,16 @@ const calculatePreset = (dates, presetKey) => {
 
 const normalizeDates = (dates) => {
   if (is(Number, dates)) {
+    if (dates <= 0) {
+      return {
+        start: moment().add(dates, 'day').startOf('day'),
+        end: moment().endOf('day'),
+      }
+    }
+
     return {
-      start: moment().subtract(dates, 'day').startOf('day'),
-      end: moment().endOf('day'),
+      start: moment().startOf('day'),
+      end: moment().add(dates, 'day').endOf('day'),
     }
   }
 
@@ -299,12 +306,12 @@ export default class DateSelector extends Component {
               {this.renderPreset({
                 key: 'single',
                 title: 'Dia',
-                date: () => 1,
+                date: () => -1,
               })}
               {this.renderPreset({
                 key: 'range',
                 title: 'Período',
-                date: () => 7,
+                date: () => -3,
               })}
             </ol>
           </li>
