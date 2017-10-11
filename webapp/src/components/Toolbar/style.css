@@ -26,13 +26,13 @@
   border-color: var(--toolitem-focused-color);
 }
 
-.active .separator:before,
-.focused .separator:before {
+.active .separator,
+.focused .separator {
   background-color: var(--toolitem-focused-color);
 }
 
-.root.active svg,
-.root.focused svg {
+.active svg,
+.focused svg {
   color: var(--toolitem-focused-color);
 }
 
@@ -55,14 +55,5 @@
 .toolbar input,
 .toolbar > div {
   height: 100%;
-}
-
-.separator:before {
-  content: "";
-  position: absolute;
-  height: 80%;
-  width: 1px;
-  background-color: #6f6f6f;
-  left: -10px;
 }
 

@@ -1,18 +1,19 @@
 @import "./properties.css";
 
-.root {
-  font-size: var(--date-input-font-size);
-}
-
 .root,
 .root * {
   box-sizing: border-box;
+}
+
+.root {
+  font-size: var(--date-input-font-size);
 }
 
 .icon {
   color: #999999;
   display: flex;
   align-items: center;
+  font-size: 16px;
 }
 
 .input {
@@ -34,8 +35,28 @@
   width: 100%;
 }
 
+.label {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+}
+
 .label > * {
   margin-left: 10px;
+}
+
+.separator:last-child {
+  display: none;
+}
+
+.active .separator {
+  background: var(--toolbar-active-color);
+}
+
+.separator {
+  width: 1px;
+  height: 20px;
+  background: #6f6f6f;
 }
 
 .inputWrap {
@@ -46,8 +67,7 @@
 }
 
 .initialPlaceholder {
-  padding-left: 0;
-  padding-right: 10px;
+  padding: 0;
   cursor: pointer;
   background: none;
   border: 0;
