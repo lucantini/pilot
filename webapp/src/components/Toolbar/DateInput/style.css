@@ -24,10 +24,6 @@
   color: #6f6f6f;
 }
 
-.input:focus {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
 .absolutePosition {
   position: absolute;
   top: calc(100% + 3px);
