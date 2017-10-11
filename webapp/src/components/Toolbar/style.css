@@ -26,6 +26,10 @@
   border-color: var(--toolitem-focused-color);
 }
 
+.separator {
+  background: #6f6f6f;
+}
+
 .active .separator,
 .focused .separator {
   background-color: var(--toolitem-focused-color);
