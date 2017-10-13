@@ -203,8 +203,8 @@ class DateInput extends React.Component {
             className={classNames(
               style.input,
               {
-                [style.show]: this.state.showDateSelector,
-                [style.hide]: !this.state.showDateSelector,
+                [style.show]: this.state.showDateSelector || dates.start,
+                [style.hide]: !this.state.showDateSelector && !dates.start,
               }
             )}
             placeholderChar=" "
@@ -220,8 +220,8 @@ class DateInput extends React.Component {
             className={classNames(
               style.initialPlaceholder,
               {
-                [style.show]: !this.state.showDateSelector,
-                [style.hide]: this.state.showDateSelector,
+                [style.show]: !this.state.showDateSelector && !dates.start,
+                [style.hide]: this.state.showDateSelector || dates.start,
               }
             )}
           >
