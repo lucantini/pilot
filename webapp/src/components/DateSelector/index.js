@@ -230,7 +230,6 @@ export default class DateSelector extends Component {
               daySize={40}
               navPrev={<IconArrowLeft />}
               navNext={<IconArrowRight />}
-              horizontalMargin={24 / 2}
               date={start}
               onDateChange={this.handleDatesChange}
             />
