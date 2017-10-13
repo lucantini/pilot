@@ -187,39 +187,46 @@ class DateInput extends React.Component {
 
     return (
       <div className={getInputClasses(showDateSelector, active)}>
-        <label
+        <div
           className={classNames(style.flex, style.label)}
-          htmlFor={this.name}
         >
           <div className={style.icon}>
             <IconCalendar />
           </div>
 
-          {dates.start
-            ? (
-              <MaskedInput
-                mask={mask}
-                size="8"
-                onFocus={() =>
-                  this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-                onBlur={() => console.log('Shouldnt it close the Picker?')}
-                className={style.input}
-                placeholderChar=" "
-                name="startDate"
-                onChange={value => this.handleInputChange('start', value)}
-                placeholder="Inicio"
-                value={dates.start}
-              />
-            ) : (
-              <button
-                onClick={() =>
-                  this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
-                className={style.initialPlaceholder}
-              >
-                Selecione um dia ou periodo
-              </button>
-            )
-          }
+          <MaskedInput
+            mask={mask}
+            size="8"
+            onFocus={() =>
+              this.setState({ showDateSelector: true, focusedInput: 'startDate' })}
+            onBlur={() => console.log('Shouldnt it close the Picker?')}
+            className={classNames(
+              style.input,
+              {
+                [style.show]: this.state.showDateSelector,
+                [style.hide]: !this.state.showDateSelector,
+              }
+            )}
+            placeholderChar=" "
+            name="startDate"
+            onChange={value => this.handleInputChange('start', value)}
+            placeholder="Inicio"
+            value={dates.start}
+            id={`${this.name}-startDate`}
+          />
+
+          <label
+            htmlFor={`${this.name}-startDate`}
+            className={classNames(
+              style.initialPlaceholder,
+              {
+                [style.show]: !this.state.showDateSelector,
+                [style.hide]: this.state.showDateSelector,
+              }
+            )}
+          >
+            Selecione um dia ou periodo
+          </label>
 
           <div className={classNames(style.separator, toolItemStyle.separator)} />
 
@@ -239,7 +246,7 @@ class DateInput extends React.Component {
             />
             : null
           }
-        </label>
+        </div>
 
         {showDateSelector ?
           <div className={style.absolutePosition}>

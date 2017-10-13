@@ -65,3 +65,14 @@
   border: 0;
   color: #6f6f6f;
 }
+
+.hide {
+  position: absolute;
+  opacity: 0;
+  z-index: -10;
+}
+
+.show {
+  opacity: 1;
+  position: initial;
+}
