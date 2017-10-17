@@ -1684,6 +1684,14 @@ npm run build
 npm run analyze
 ```
 
+## Storybook preview on GitHub pages
+
+Your team can deploy any branch to the GitHub Pages using `yarn preview` command. It will [build storybook statically](https://storybook.js.org/basics/exporting-storybook/) and
+and push its files to the branch [`gh-pages`](https://github.com/pagarme/pilot/tree/gh-pages)`.
+
+You can only publish one branch at a time, you must talk to your coworker and inform them you are going to publish
+a new change to gh-pages, for the moment the gh-pages will be like a playground to preview work in progress components and pages.
+
 ## Deployment
 
 `npm run build` creates a `build` directory with a production build of your app. Set up your favourite HTTP server so that a visitor to your site is served `index.html`, and requests to static paths like `/static/js/main.<hash>.js` are served with the contents of the `/static/js/main.<hash>.js` file.

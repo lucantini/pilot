@@ -9,6 +9,7 @@
     "@storybook/addons": "3.2.6",
     "@storybook/channels": "3.2.0",
     "@storybook/react": "3.2.8",
+    "@storybook/storybook-deployer": "2.0.0",
     "autoprefixer": "7.1.4",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.0",
@@ -76,7 +77,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "storybook": "start-storybook -p 6006",
     "percy": "build-storybook && percy-storybook --widths=1920",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "preview": "storybook-to-ghpages"
   },
   "jest": {
     "collectCoverageFrom": [
