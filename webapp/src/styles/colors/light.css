@@ -157,4 +157,6 @@
   --color-light-error: var(--color-light-red-200);
   --color-light-info: var(--color-light-blue-200);
   --color-light-success: var(--color-light-green-secondary-200);
+
+  --color-light-greenish-20: #37cc9a;
 }

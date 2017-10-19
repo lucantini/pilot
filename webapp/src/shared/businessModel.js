@@ -1,5 +1,5 @@
 export default {
-  key: 'status',
+  key: 'business_model',
   name: 'Modelo de negócio',
   items: [
     {

@@ -1,0 +1,24 @@
+@import "../../styles/colors.css";
+@import "../../styles/typography.css";
+@import "./properties.css";
+
+.tag {
+  font-family: var(--tag-font-family);
+  font-style: var(--tag-font-style);
+  font-size: var(--tag-font-size-micro);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-light-silver-200);
+  border: dashed 1px;
+  border-color: var(--color-light-silver-200);
+  border-radius: 3px;
+  padding: var(--tag-padding-micro);
+  background-color: transparent;
+  background-image: none;
+  cursor: default;
+}
+
+.tag:hover {
+  color: var(--color-light-silver-300);
+  border-color: var(--color-light-silver-300);
+}

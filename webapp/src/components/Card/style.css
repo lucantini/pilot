@@ -9,7 +9,6 @@
   border-radius: var(--card-border-radius);
   width: 100%;
   height: auto;
-  overflow: hidden;
 }
 
 .card * {
@@ -24,6 +23,12 @@
 
 .title > svg:first-child {
   margin-right: var(--card-title-icon-margin);
+}
+
+.title svg {
+  fill: transparent;
+  stroke-width: 2px;
+  stroke: #96a0ac;
 }
 
 .titlePadding {
@@ -43,7 +48,7 @@
 }
 
 .title > h3 {
-  color: var(--color-light-green-accent-100);
+  color: var(--card-title-color);
   margin-right: var(--card-title-icon-margin);
 }
 

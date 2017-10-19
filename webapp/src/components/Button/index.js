@@ -5,8 +5,9 @@ import classNames from 'classnames'
 import stylesheet from './style.css'
 
 
-function Button ({ onClick, variant, base, color, size, children, type }) {
-  const className = classNames(
+function Button ({ disabled, className, onClick, variant, base, color, size, children, type }) {
+  const buttonClasses = classNames(
+    className,
     stylesheet.button,
     stylesheet[variant],
     stylesheet[`${base}-${variant}`],
@@ -15,7 +16,7 @@ function Button ({ onClick, variant, base, color, size, children, type }) {
   )
 
   return (
-    <button className={className} onClick={onClick} type={type}>
+    <button disabled={disabled} className={buttonClasses} onClick={onClick} type={type}>
       {children}
     </button>
   )
@@ -25,7 +26,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   onClick: PropTypes.func,
   variant: PropTypes.oneOf([
-    'flat', 'gradient', 'outline', 'dashed', 'clean', 'block',
+    'flat', 'gradient', 'outline', 'clean', 'block',
   ]),
   base: PropTypes.oneOf([
     'dark', 'light',
@@ -43,6 +44,8 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.node,
   ]).isRequired,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
 }
 
 Button.defaultProps = {
@@ -52,6 +55,8 @@ Button.defaultProps = {
   color: 'green-primary',
   size: 'medium',
   type: 'button',
+  className: null,
+  disabled: false,
 }
 
 export default Button
