@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import IconArrowUp from 'react-icons/lib/md/keyboard-arrow-up'
-import IconArrowDown from 'react-icons/lib/md/keyboard-arrow-down'
 import IconFunnel from 'react-icons/lib/fa/filter'
+
 import {
+  __,
+  contains,
   merge,
   partial,
+  keys,
+  flatten,
+  props as rProps,
+  prop,
+  pipe,
+  propEq,
+  mapObjIndexed,
+  filter as rFilter,
+  find,
+  map,
+  propSatisfies,
 } from 'ramda'
 
 import style from './style.css'
@@ -16,11 +28,14 @@ import {
   CardTitle,
   CardContent,
   CardActions,
+  CardSection,
 } from '../../components/Card'
 
-import DateRange from '../../components/Toolbar/DateRange'
+import DateInput from '../../components/Toolbar/DateInput'
 import SearchField from '../../components/Toolbar/SearchField'
+import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button'
+import Tag from '../../components/Tag'
 
 import {
   Grid,
@@ -30,24 +45,30 @@ import {
 
 import CheckboxGroup from '../../components/CheckboxGroup'
 
+import presets from '../../shared/datePresets'
+
 
 class Filters extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      showContent: true,
+      collapsed: true,
       selectedDate: '',
       search: '',
       activeFilters: {},
+      dates: { start: null, end: null },
     }
 
     this.handleVisibility = this.handleVisibility.bind(this)
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this)
+    this.handleDateInputChange = this.handleDateInputChange.bind(this)
     this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
     this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleCleanFilters = this.handleCleanFilters.bind(this)
     this.handleFiltersSubmit = this.handleFiltersSubmit.bind(this)
+
+    this.createTags = this.createTags.bind(this)
+    this.cardTitle = this.cardTitle.bind(this)
   }
 
   componentDidMount () {
@@ -55,25 +76,30 @@ class Filters extends Component {
   }
 
   setDefaults () {
-    const {
-      dateRanges,
-    } = this.props
-
     this.setState({
-      selectedDate: { value: dateRanges[0].value },
+      selectedDate: '',
     })
   }
 
   handleVisibility () {
-    this.setState({ showContent: !this.state.showContent })
+    this.setState({
+      collapsed: !this.state.collapsed,
+    })
   }
 
-  handleDateRangeChange (selectedDate) {
-    this.setState({ selectedDate })
+  handleDateInputChange (selectedDate) {
+    console.log(selectedDate)
+    this.setState({
+      dates: selectedDate,
+      submitted: false,
+    })
   }
 
   handleSearchFieldChange (search) {
-    this.setState({ search })
+    this.setState({
+      search,
+      submitted: false,
+    })
   }
 
   handleFilterChange (filter, values) {
@@ -82,6 +108,7 @@ class Filters extends Component {
         this.state.activeFilters,
         { [filter]: values }
       ),
+      submitted: false,
     })
   }
 
@@ -90,6 +117,7 @@ class Filters extends Component {
       activeFilters: {},
       selectedDate: 'hoje',
       search: '',
+      submitted: false,
     })
 
     this.setDefaults()
@@ -112,49 +140,99 @@ class Filters extends Component {
       }
     )
 
+    this.setState({
+      submitted: true,
+      collapsed: true,
+    })
+
     this.props.onFilter(selectedFilters)
+  }
+
+  createTags () {
+    const activeFiltersObj = mapObjIndexed((values, key) =>
+      pipe(
+        find(propEq('key', key)),
+        prop('items'),
+        rFilter(propSatisfies(contains(__, values), 'value'))
+      )(this.props.sections)
+    )
+
+    const withLabel = activeFiltersObj(this.state.activeFilters)
+    const selectedFilters = pipe(
+      rProps(keys(withLabel)),
+      flatten
+    )(withLabel)
+
+    return map(({ label, value }) => (
+      <Tag
+        key={value}
+        text={label}
+      />
+    ), selectedFilters)
+  }
+
+  cardTitle () {
+    const activeFiltersKeys = Object.keys(this.state.activeFilters)
+
+    const { collapsed } = this.state
+
+    if (!collapsed) {
+      return 'Menos filtros'
+    }
+
+    if (collapsed && activeFiltersKeys.length === 0) {
+      return 'Mais filtros'
+    }
+
+    return 'Editar filtros'
   }
 
   render () {
     const {
-      showContent,
+      collapsed,
+      activeFilters,
+      dates,
     } = this.state
 
+    const activeFiltersKeys = Object.keys(activeFilters)
+
     return (
-      <Card>
+      <Card className={style.allowContentOverflow}>
         <form action="/" method="post" onSubmit={this.handleFiltersSubmit}>
           <CardTitle
             title="Filtros"
             icon={<IconFunnel />}
-            onClick={this.handleVisibility}
-          >
-            {
-              showContent
-                ? <IconArrowUp />
-                : <IconArrowDown />
-            }
-          </CardTitle>
+          />
 
           <CardContent>
             <Grid>
-              <Row flex>
+              <Row flex className={style.customRow}>
                 <Col>
-                  <DateRange
-                    items={this.props.dateRanges}
-                    onChange={this.handleDateRangeChange}
-                    selected={this.state.selectedDate.value}
-                  />
-                </Col>
-                <Col alignEnd>
-                  <SearchField
-                    value={this.state.search}
-                    onChange={this.handleSearchFieldChange}
-                  />
+                  <Toolbar>
+                    <DateInput
+                      dates={dates}
+                      active={dates.start || dates.end}
+                      onChange={this.handleDateInputChange}
+                      presets={presets}
+                    />
+
+                    <SearchField
+                      value={this.state.search}
+                      placeholder="Filtre por ID, CPF, nome e e-mail."
+                      onChange={this.handleSearchFieldChange}
+                      active={!!this.state.search}
+                    />
+                  </Toolbar>
                 </Col>
               </Row>
 
-              {showContent &&
-                <Row>
+              <CardSection
+                title={this.cardTitle()}
+                collapsedTitle={this.cardTitle()}
+                collapsed={collapsed}
+                onTitleClick={() => this.setState({ collapsed: !collapsed })}
+              >
+                <Row className={style.paddingTop}>
                   {this.props.sections.map(({ name, items, key }) => (
                     <Col palm={12} tablet={6} desk={4} tv={4} key={name}>
                       <h4 className={style.heading}>{name}</h4>
@@ -171,33 +249,62 @@ class Filters extends Component {
                     </Col>
                   ))}
                 </Row>
+              </CardSection>
+
+              {collapsed && activeFiltersKeys.length > 0 &&
+                <div>
+                  <Row>
+                    <Col>
+                      <p
+                        className={style.selectedOptions}
+                      >
+                        Opções selecionadas
+                      </p>
+                    </Col>
+                  </Row>
+
+                  <Row className={style.marginTop}>
+                    <Col className={style.spaceButtons}>
+                      {this.createTags()}
+                    </Col>
+                  </Row>
+                </div>
               }
             </Grid>
           </CardContent>
-          { showContent &&
-            <CardActions>
-              <Grid>
-                <Row flex>
-                  <Col alignEnd className={style.actionsSpacing}>
-                    <Button
-                      variant="outline"
-                      size="small"
-                      onClick={this.handleCleanFilters}
-                    >
-                      Limpar filtros
-                    </Button>
 
-                    <Button
-                      type="submit"
-                      size="small"
-                    >
-                      Filtrar
-                    </Button>
-                  </Col>
-                </Row>
-              </Grid>
-            </CardActions>
-          }
+          <CardActions>
+            <Grid>
+              <Row flex>
+                <Col alignEnd className={style.actionsSpacing}>
+                  <Button
+                    variant="outline"
+                    color="silver"
+                    size="small"
+                    onClick={() => this.handleCleanFilters()}
+                    disabled
+                    className={style.actionButton}
+                  >
+                    Limpar filtros
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    color="silver"
+                    size="small"
+                    disabled
+                    className={style.actionButton}
+                  >
+                    {
+                      this.state.submitted
+                        ? 'Filtrar'
+                        : 'Aplicar filtros'
+                    }
+                  </Button>
+                </Col>
+              </Row>
+            </Grid>
+          </CardActions>
         </form>
       </Card>
     )
@@ -205,10 +312,6 @@ class Filters extends Component {
 }
 
 Filters.propTypes = {
-  dateRanges: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  })).isRequired,
   sections: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
