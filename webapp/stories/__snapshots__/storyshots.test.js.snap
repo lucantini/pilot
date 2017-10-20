@@ -7198,9 +7198,11 @@ exports[`Storyshots DateSelector All types 1`] = `
       <div
         className={undefined}
       >
-        <caption>
+        <div
+          className={undefined}
+        >
           1 dia selecionado
-        </caption>
+        </div>
         <button
           className=""
           disabled={false}

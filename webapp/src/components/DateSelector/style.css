@@ -97,7 +97,7 @@
   justify-content: flex-end;
 }
 
-.actions caption {
+.selectedDays {
   flex: 1;
   text-align: start;
   color: #a1a1a1;

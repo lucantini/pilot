@@ -312,11 +312,11 @@ export default class DateSelector extends Component {
 
     return (
       <div className={style.actions}>
-        <caption>
+        <div className={style.selectedDays}>
           {daysCount === 0 ? 'Nenhum dia ou período selecionado' : null}
           {daysCount === 1 ? '1 dia selecionado' : null}
           {daysCount > 1 ? `${daysCount} dias selecionados` : null}
-        </caption>
+        </div>
         <Button
           variant="clean"
           className={style.silverBtn}
