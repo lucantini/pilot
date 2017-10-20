@@ -223,7 +223,7 @@ export default class DateSelector extends Component {
           type="radio"
           name={group}
           id={id}
-          onClick={() => this.handlePresetChange(date(), key)}
+          onChange={() => this.handlePresetChange(date(), key)}
           checked={selectedId === id}
         />
         <label htmlFor={id}>
