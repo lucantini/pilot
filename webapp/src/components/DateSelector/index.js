@@ -80,7 +80,14 @@ const calculatePreset = (dates, presetKey) => {
   return 'range'
 }
 
-const normalizeDates = (dates) => {
+const normalizeDates = (dates, preset) => {
+  if (preset === 'single') {
+    return {
+      start: moment().add(dates, 'day').startOf('day'),
+      end: moment().add(dates, 'day').endOf('day'),
+    }
+  }
+
   if (isNumber(dates)) {
     if (dates <= 0) {
       return {
@@ -183,7 +190,7 @@ export default class DateSelector extends Component {
   }
 
   handlePresetChange (dates, key) {
-    const normalizedDates = normalizeDates(dates)
+    const normalizedDates = normalizeDates(dates, key)
     const state = {
       preset: key,
       dates: normalizedDates,
