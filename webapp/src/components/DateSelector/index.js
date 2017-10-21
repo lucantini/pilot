@@ -4,6 +4,8 @@ import {
   string,
   arrayOf,
   shape,
+  oneOfType,
+  object,
 } from 'prop-types'
 
 import {
@@ -168,6 +170,9 @@ export default class DateSelector extends Component {
   componentWillReceiveProps (props) {
     if (props && props.dates) {
       const { dates } = props
+
+      dates.start = dates.start && dates.start.isValid() ? dates.start : null
+      dates.end = dates.end && dates.end.isValid() ? dates.end : null
 
       if (dates) {
         this.setState({ dates })
@@ -388,8 +393,8 @@ DateSelector.propTypes = {
   onCancel: func,
   onFocusChange: func,
   dates: shape({
-    start: momentObj,
-    end: momentObj,
+    start: oneOfType([momentObj, object]),
+    end: oneOfType([momentObj, object]),
   }).isRequired,
   focusedInput: string,
   presets: arrayOf(shape({
