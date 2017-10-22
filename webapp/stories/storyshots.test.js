@@ -1,8 +1,9 @@
 import initStoryshots, { snapshotWithOptions } from '@storybook/addon-storyshots'
-import path from 'path'
+import MockDate from 'mockdate'
 
+MockDate.set(1506729600000)
 
-function createNodeMock(element) {
+function createNodeMock (element) {
   if (element.type) {
     return {
       __consolidated_events_handlers__: null,
@@ -10,7 +11,7 @@ function createNodeMock(element) {
       querySelectorAll: () => [],
       style: {
         height: 0,
-      }
+      },
     }
   }
 
@@ -26,7 +27,7 @@ initStoryshots({
 jest.mock('react-dom', () => ({
   findDOMNode: () => ({
     querySelector: () => null,
-  })
+  }),
 }))
 
 global.getComputedStyle = () => ({
