@@ -28,7 +28,7 @@
   position: absolute;
   top: 0;
   left: var(--date-input-inner-spacing);
-  width: 100%;
+  width: calc(100% - var(--date-input-inner-spacing));
   height: 100%;
   background-color: transparent;
 }
