@@ -74,7 +74,7 @@ class DateSelectorExample extends React.Component {
         focusedInput={this.state.focusedInput}
         onFocusChange={this.handleFocusChange}
         onChange={this.handleChange}
-        onSubmit={action('onSubmit')}
+        onConfirm={action('onConfirm')}
         onCancel={action('onCancel')}
       />
     )
