@@ -1,3 +1,4 @@
+@import "../../../styles/typography.css";
 @import "./properties.css";
 @import "../properties.css";
 
@@ -17,7 +18,7 @@
   white-space: pre;
   font-size: var(--toolitem-font-size);
   color: var(--toolitem-input-color);
-  font-family: var(--font-family);
+  font-family: var(--body-font-family);
 }
 
 .input:placeholder {
@@ -66,10 +67,6 @@
 
 .separator:last-child {
   display: none;
-}
-
-.active .separator {
-  background: var(--toolbar-active-color);
 }
 
 .separator {
