@@ -106,7 +106,7 @@
 }
 
 .actions button {
-  font-size: var(--date-picker-font-size);
+  font-size: var(--date-selector-font-size);
 }
 
 .actions button:active {
