@@ -1,7 +1,7 @@
 import initStoryshots, { snapshotWithOptions } from '@storybook/addon-storyshots'
 import MockDate from 'mockdate'
 
-MockDate.set(1506729600000)
+MockDate.set(1506783600000)
 
 function createNodeMock (element) {
   if (element.type) {

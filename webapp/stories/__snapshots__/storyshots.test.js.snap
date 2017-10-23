@@ -5726,7 +5726,7 @@ exports[`Storyshots DateSelector All types 1`] = `
                             </button>
                           </td>
                           <td
-                            className="CalendarDay CalendarDay--today CalendarDay--valid CalendarDay--selected"
+                            className="CalendarDay CalendarDay--valid"
                             style={
                               Object {
                                 "height": 39,
@@ -5748,7 +5748,7 @@ exports[`Storyshots DateSelector All types 1`] = `
                             </button>
                           </td>
                           <td
-                            className="CalendarDay CalendarDay--valid"
+                            className="CalendarDay CalendarDay--today CalendarDay--valid CalendarDay--selected"
                             style={
                               Object {
                                 "height": 39,
@@ -14688,12 +14688,12 @@ exports[`Storyshots Toolbar DateInput 1`] = `
                 onPaste={[Function]}
                 placeholder="Inicio"
                 size="8"
-                value="29/09/2017"
+                value="30/09/2017"
               />
               <span
                 className={undefined}
               >
-                29/09/2017
+                30/09/2017
               </span>
             </div>
             <label
@@ -14769,12 +14769,12 @@ exports[`Storyshots Toolbar DateInput 1`] = `
                 onPaste={[Function]}
                 placeholder="Inicio"
                 size="8"
-                value="22/09/2017"
+                value="23/09/2017"
               />
               <span
                 className={undefined}
               >
-                22/09/2017
+                23/09/2017
               </span>
             </div>
             <label
@@ -14802,12 +14802,12 @@ exports[`Storyshots Toolbar DateInput 1`] = `
                 onPaste={[Function]}
                 placeholder="Fim"
                 size="8"
-                value="29/09/2017"
+                value="30/09/2017"
               />
               <span
                 className={undefined}
               >
-                29/09/2017
+                30/09/2017
               </span>
             </div>
           </div>
@@ -14874,12 +14874,12 @@ exports[`Storyshots Toolbar DateInput 1`] = `
                 onPaste={[Function]}
                 placeholder="Inicio"
                 size="8"
-                value="22/09/2017"
+                value="23/09/2017"
               />
               <span
                 className={undefined}
               >
-                22/09/2017
+                23/09/2017
               </span>
             </div>
             <label
