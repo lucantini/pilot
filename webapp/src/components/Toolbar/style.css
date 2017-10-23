@@ -34,6 +34,14 @@
   background: var(--toolitem-separator-color);
 }
 
+.icon {
+  color: var(--toolitem-input-icon-color);
+  display: flex;
+  align-items: center;
+  font-size: var(--toolitem-input-icon-size);
+  margin-right: var(--toolitem-input-inner-spacing);
+}
+
 .active .separator,
 .focused .separator {
   background-color: var(--toolitem-focused-color);
@@ -43,12 +51,12 @@
   background-color: var(--toolitem-error-color);
 }
 
-.error svg {
+.error .icon {
   color: var(--toolitem-error-color);
 }
 
-.active svg,
-.focused svg {
+.active .icon,
+.focused .icon {
   color: var(--toolitem-focused-color);
 }
 

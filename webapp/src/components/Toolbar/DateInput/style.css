@@ -10,14 +10,6 @@
   font-size: var(--date-input-font-size);
 }
 
-.icon {
-  color: var(--date-input-icon-color);
-  display: flex;
-  align-items: center;
-  font-size: var(--date-input-icon-size);
-  margin-right: var(--date-input-inner-spacing);
-}
-
 .input,
 .expanderSpan {
   border: 0;

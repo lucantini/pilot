@@ -13,5 +13,9 @@
   --toolitem-border-radius: 3px;
   --toolitem-box-shadow: var(--box-shadow);
   --toolitem-active-background: var(--color-light-red-gradient);
+
   --toolitem-input-color: #999999;
+  --toolitem-input-icon-color: #999999;
+  --toolitem-input-inner-spacing: 5px;
+  --toolitem-input-icon-size: 16px;
 }
